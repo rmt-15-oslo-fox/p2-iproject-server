@@ -1,6 +1,6 @@
 class UserController {
     static async login(req, res, next){
-        next('ok')
+        console.log('ok');
     }
 }
 
