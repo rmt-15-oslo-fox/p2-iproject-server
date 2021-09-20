@@ -7,13 +7,13 @@ describe("POST /register - (user register test)", () => {
   const data = {
     name: "John Doe",
     email: "johndoe@gmail.com",
-    password: "john",
+    password: "johndoen",
   };
 
   const data1 = {
     name: "John JS",
     email: "johnjs@gmail.com",
-    password: "john",
+    password: "johndoen",
   };
 
   // Create one user for testing unique email
@@ -34,7 +34,7 @@ describe("POST /register - (user register test)", () => {
       .catch((err) => done(err));
   });
 
-  test(`201 Registration successful`, (done) => {
+  test(`201 Registration successful - response should have the correct property and value`, (done) => {
     request(app)
       .post("/register")
       .send(data1)
@@ -51,6 +51,173 @@ describe("POST /register - (user register test)", () => {
 
         expect(user).toHaveProperty("email");
         expect(user.email).toBe(data1.email);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if email is null`, (done) => {
+    request(app)
+      .post("/register")
+      .send({ email: null, name: "John", password: "testing" })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorEmail = body.errors[0];
+        expect(errorEmail).toBe("Email cannot be null");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if email is already used`, (done) => {
+    request(app)
+      .post("/register")
+      .send({ email: "johndoe@gmail.com", name: "John", password: "testing" })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorEmail = body.errors[0];
+        expect(errorEmail).toBe("Email is already exists");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if name is null`, (done) => {
+    request(app)
+      .post("/register")
+      .send({ email: "testing@gmail.com", name: null, password: "testing" })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorName = body.errors[0];
+        expect(errorName).toBe("Name cannot be null");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if name is empty`, (done) => {
+    request(app)
+      .post("/register")
+      .send({ email: "testing@gmail.com", name: "", password: "testing" })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorName = body.errors[0];
+        expect(errorName).toBe("Name is required");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if password is null`, (done) => {
+    request(app)
+      .post("/register")
+      .send({
+        email: "testingpassword@gmail.com",
+        name: "John",
+        password: null,
+      })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorPassword = body.errors[0];
+        expect(errorPassword).toBe("Password cannot be null");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if password is empty`, (done) => {
+    request(app)
+      .post("/register")
+      .send({ email: "testingpassword@gmail.com", name: "John", password: "" })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorPassword = body.errors[0];
+        expect(errorPassword).toBe("Password is required");
+        expect(body).not.toHaveProperty("user");
+        done();
+      });
+  });
+
+  test(`400 Registration failed - response should have errors property if password length is too short!`, (done) => {
+    request(app)
+      .post("/register")
+      .send({
+        email: "testingpassword@gmail.com",
+        name: "John",
+        password: "tes",
+      })
+      .then((response) => {
+        const { body } = response;
+
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(400);
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Registration failed");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorPassword = body.errors[0];
+        expect(errorPassword).toBe(
+          "Your password is too short! You need 5+ characters"
+        );
+        expect(body).not.toHaveProperty("user");
         done();
       });
   });
