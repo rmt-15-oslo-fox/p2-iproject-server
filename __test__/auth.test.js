@@ -222,3 +222,99 @@ describe("POST /register - (user register test)", () => {
       });
   });
 });
+
+describe("POST /login - (user login test)", () => {
+  const registerPayload = {
+    name: "John Doe",
+    email: "johndoe@gmail.com",
+    password: "johndoe",
+  };
+
+  beforeAll((done) => {
+    request(app)
+      .post("/register")
+      .send(registerPayload)
+      .then((response) => {
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  afterAll((done) => {
+    queryInterface
+      .bulkDelete("Users", {})
+      .then(() => done())
+      .catch((err) => done(err));
+  });
+
+  test(`(200 - login successful) - response should have the correct property and value`, (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: registerPayload.email,
+        password: registerPayload.password,
+      })
+      .then((response) => {
+        const { body } = response;
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(200);
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Login successful");
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("success");
+        expect(body).toHaveProperty("access_token");
+        expect(body.access_token).toEqual(expect.any(String));
+        done();
+      });
+  });
+
+  test(`(401 - Login failed) - response should have the errors property and value if email is wrong or not found in database`, (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "wrong@gmail.com",
+        password: registerPayload.password,
+      })
+      .then((response) => {
+        const { body } = response;
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(401);
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Login failed");
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).not.toHaveProperty("access_token");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorMessage = body.errors[0];
+        expect(errorMessage).toEqual("The email or password are incorrect");
+        done();
+      });
+  });
+
+  test(`(401 - Login failed) - response should have the errors property and value if password is not match`, (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: registerPayload.email,
+        password: "wrongpassword",
+      })
+      .then((response) => {
+        const { body } = response;
+        expect(body).toHaveProperty("code");
+        expect(body.code).toBe(401);
+        expect(body).toHaveProperty("message");
+        expect(body.message).toBe("Login failed");
+        expect(body).toHaveProperty("status");
+        expect(body.status).toBe("fail");
+        expect(body).not.toHaveProperty("access_token");
+        expect(body).toHaveProperty("errors");
+        expect(body.errors).toEqual(expect.any(Array));
+        const errorMessage = body.errors[0];
+        expect(errorMessage).toEqual("The email or password are incorrect");
+        done();
+      });
+  });
+});
