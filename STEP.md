@@ -25,19 +25,25 @@
 
 > GET /users `done`
 
-> GET /users/:id/todos `done`
+<!-- > GET /users/:id/todos `done` -->
 
 ### Todos
 
-> GET /users/:id/todos `done`
+> GET /todos/:userId `done` id = user.id dari params bukan req.user.id
 
-> POST /todos hanya user nya sndiri
+> POST /todos/:userId hanya user nya sndiri yg bsa access `done` (user.id bsa dpt dri req.user.id) => where isComplete false
 
-> PUT /todos
+> authorization dri sini smpe bawah
 
-> PATCH /todos
+> PUT /todos/:todoId hanya user nya sndiri yg bsa access
 
-> DELETE /todos
+> PATCH /todos/:todoId hanya user nya sndiri yg bsa access
+
+> DELETE /todos/:todoId hanya user nya sndiri yg bsa access
+
+# tambah halaman buat history todo yg udh selese
+
+> GET /todos/:userId where: isComplete true
 
 ### Tags TodoTags
 

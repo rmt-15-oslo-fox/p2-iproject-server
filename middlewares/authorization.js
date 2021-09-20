@@ -1,31 +1,24 @@
-// const { Todo } = require("../models");
+const { Todo } = require("../models");
 const authorization = async (req, res, next) => {
   const userId = req.user.id;
-  const todoId = +req.params.id;
-
+  const id = +req.params.id;
   try {
-    // console.log(todoId, userId, ">>");
-    if (userId !== todoId) {
+    console.log("aku");
+    const foundTodos = await Todo.findByPk(id);
+    if (!foundTodos) {
+      throw {
+        name: "NOTFOUND",
+        msg: "Task not found",
+      };
+    }
+
+    if (foundTodos.UserId !== userId) {
       throw {
         name: "FORBIDDEN",
         msg: "Doesn't have enough access!",
       };
     }
-    // console.log("aku");
-    // const foundTodos = await Todo.findByPk(todoId);
-    // if (!foundTodos) {
-    //   throw {
-    //     name: "NOTFOUND",
-    //     msg: "Task not found",
-    //   };
-    // }
-
-    // if (foundTodos.UserId !== userId) {
-    //   throw {
-    //     name: "FORBIDDEN",
-    //     msg: "Doesn't have enough access!",
-    //   };
-    // }
+    // console.log("lewat ga");
     next();
   } catch (error) {
     next(error);

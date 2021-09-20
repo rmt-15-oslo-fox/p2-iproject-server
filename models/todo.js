@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Todo.belongsTo(models.User);
-      Todo.belongsToMany(models.Tag, { through: models.TodoTag });
     }
   }
   Todo.init(
     {
       task: DataTypes.STRING,
       description: DataTypes.STRING,
+      tag: DataTypes.ARRAY(DataTypes.TEXT),
       isComplete: DataTypes.BOOLEAN,
       UserId: DataTypes.INTEGER,
     },

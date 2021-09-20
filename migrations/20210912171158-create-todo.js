@@ -11,6 +11,9 @@ module.exports = {
       task: {
         type: Sequelize.STRING,
       },
+      tag: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+      },
       description: {
         type: Sequelize.STRING,
       },

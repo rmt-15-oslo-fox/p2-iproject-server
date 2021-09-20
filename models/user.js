@@ -17,15 +17,20 @@ module.exports = (sequelize, DataTypes) => {
     {
       username: {
         type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
         validate: {
           notEmpty: {
+            msg: "Username is required",
+          },
+          notNull: {
             msg: "Username is required",
           },
         },
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notEmpty: {
             msg: "Email is required",
@@ -33,10 +38,14 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: {
             msg: "Invalid email format",
           },
+          notNull: {
+            msg: "Username is required",
+          },
         },
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notEmpty: {
             msg: "Password is required",
@@ -44,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [8],
             msg: "Password must have at least 8 characters",
+          },
+          notNull: {
+            msg: "Username is required",
           },
         },
       },

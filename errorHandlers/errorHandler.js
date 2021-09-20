@@ -5,18 +5,19 @@ const errorHandler = (err, req, res, next) => {
   if (err.name === "NOTFOUND") {
     code = 404;
     msg = err.msg;
-  }
-  if (err.name === "SequelizeValidationError") {
-    code = 400;
-    msg = err.errors.map((el) => el.message);
-  }
-  if (err.name === "SequelizeUniqueConstraintError") {
+  } else if (err.name === "FORBIDDEN") {
+    code = 403;
+    msg = err.msg;
+  } else if (err.name === "SequelizeValidationError") {
     code = 400;
     msg = err.errors.map((el) => {
-      return (el.message = "Username already exists");
+      return el.message;
     });
+  } else if (err.name === "SequelizeUniqueConstraintError") {
+    code = 400;
+    msg = "Username is already exists";
   }
-  res.status(code).json(msg);
+  res.status(code).json({ msg });
 };
 
 module.exports = { errorHandler };

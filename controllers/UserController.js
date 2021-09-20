@@ -42,15 +42,15 @@ class UserController {
 
       if (!foundUser) {
         throw {
-          name: "NOTFOUND",
-          msg: "User not found",
+          name: "NOTAUTHORIZED",
+          msg: "Invalid email/password",
         };
       }
 
       const isMatch = comparePassword(password, foundUser.password);
       if (!isMatch) {
         throw {
-          name: "NOTFOUND",
+          name: "NOTAUTHORIZED",
           msg: "Invalid email/password",
         };
       }

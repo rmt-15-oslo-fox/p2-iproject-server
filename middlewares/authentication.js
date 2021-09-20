@@ -2,9 +2,14 @@ const { verifyToken } = require("../helpers/jwt");
 const { User } = require("../models");
 
 const authentication = async (req, res, next) => {
-  const { access_token } = req.headers;
-
   try {
+    const { access_token } = req.headers;
+    if (!access_token) {
+      throw {
+        name: "NOTAUTHORIZED",
+        msg: "Invalid token",
+      };
+    }
     const payload = verifyToken(access_token);
 
     const { id, username, email } = payload;
@@ -30,6 +35,7 @@ const authentication = async (req, res, next) => {
       email: foundUser.email,
     };
 
+    // console.log(req.user);
     next();
   } catch (err) {
     next(err);
