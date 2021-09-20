@@ -28,6 +28,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      jumlahPos: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       MountId: {
         allowNull: false,
         type: Sequelize.INTEGER,

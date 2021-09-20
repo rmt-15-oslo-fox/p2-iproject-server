@@ -22,11 +22,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       age: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       address: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

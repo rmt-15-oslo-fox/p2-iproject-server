@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const { hashPassword } = require('../helper/bcrypt')
+const { hashPassword } = require('../helpers/bcrypt')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -36,18 +36,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     age: {
-      allowNull: false,
       type: DataTypes.INTEGER,
       validate: {
         min: 15
       }
     },
     address: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     },
   }, {
     hooks: {
