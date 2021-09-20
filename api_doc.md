@@ -56,3 +56,55 @@ Base URL: http://localhost:300
   ]
 }
 ```
+
+### `POST /login`
+
+#### _Request Headers_
+
+> not needed
+
+#### _Request Body_
+
+```JSON
+{
+  "email": "string",
+  "password": "string
+}
+```
+
+#### _Response (200)_
+
+```JSON
+{
+  "code": 200,
+  "status": "success",
+  "message": "Login successful",
+  "access_token": "<jwt token>"
+}
+```
+
+### _Response (401)_
+
+```JSON
+{
+  "code": 401,
+  "status": "fail",
+  "message": "Login failed",
+  "errors": [
+    "The email or password are incorrect"
+  ]
+}
+```
+
+### _Response (500)_
+
+```JSON
+{
+  "code": 500,
+  "status": "fail",
+  "message": "Login failed",
+  "errors": [
+    "Internal Server Error"
+  ]
+}
+```
