@@ -1,8 +1,8 @@
 const { signToken } = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library')
-const { User } = require('../models')
+const { User, Mountain, Trip } = require('../models')
 
-class UserController {
+class Controller {
     static async oauthlogin(req, res, next) {
         
         try {
@@ -40,6 +40,31 @@ class UserController {
         }
     }
 
+    static async getMountains(req, res, next){
+        try {
+            const Mountains = await Mountain.findAll({
+                include: ['Tracks']
+            })
+            res.status(200).json(Mountains)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async addTrip(req, res, next){
+        try {
+            const { MountId, TrackId, schedule } = req.body
+            const tripCreated = await Trip.create({
+                MountId,
+                TrackId,
+                schedule
+            })
+            res.status(201).json(tripCreated)
+        } catch (err) {
+            next(err)
+        }
+    }
+
 }
 
-module.exports = UserController
+module.exports = Controller

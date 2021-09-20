@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Trip.hasOne(models.Mountain, {foreignKey: 'MountId'})
+      // Trip.hasOne(models.Mountain, {foreignKey: 'MountId'})
     }
   };
   Trip.init({
     MountId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    TrackId: {
       allowNull: false,
       type: DataTypes.INTEGER
     },
@@ -24,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     },
     status: {
-      allowNull: false,
       type: DataTypes.BOOLEAN
     }
   }, {
