@@ -17,6 +17,13 @@ const errorHandler = (err, req, res, next) => {
       break;
     }
 
+    case "Login Error": {
+      code = 401;
+      errors = ["The email or password are incorrect"];
+      message = "Login failed";
+      break;
+    }
+
     default: {
       break;
     }
