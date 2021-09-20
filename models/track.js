@@ -50,6 +50,13 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
+    jumlahPos: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: true
+      }
+    },
     MountId: {
       allowNull: false,
       type: DataTypes.INTEGER,
