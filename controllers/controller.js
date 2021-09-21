@@ -142,15 +142,60 @@ class Controller{
         })
     }
 
-    // static getFavourites(req, res){
-    //     Favourite.findAll()
-    //     .then(data =>{
-    //         res.status(200).json(data)
-    //     })
-    //     .catch(err =>{
-    //         res.status(500).json({message: 'Internal Server Error'})
-    //     })
-    // }
+    static getAttractions(req, res){
+        const page = +req.query.page || 1
+        const limit = +req.query.size || 8
+        const location_id = +req.query.location_id || 294229
+        
+        let offset = (page - 1) * limit
+
+        axios({
+            method: "get",
+            url: `${rapidUrl}/attractions/list`,
+            headers: rapidHeaders,
+            params: {
+                location_id,
+                limit,
+                offset,
+                units: 'km'
+            }
+        })
+        .then(response =>{
+            let result = response.data.data
+            res.status(200).json(result)
+        })
+        .catch(err =>{
+            res.status(500).json({message: 'Internal Server Error'})
+        })
+    }
+
+    static postFavourites(req, res){
+        const userId = +req.user.id
+        const {location_id, lat, long, imageUrl, address, rating, description} = req.query
+
+        Favourite.create({userId, location_id, lat, long, imageUrl, address, rating, description})
+        .then(data => {
+            res.status(201).json(data)
+        })
+        .catch(err =>{
+            res.status(500).json({message: "Internal Server Error"})
+        })
+    }
+
+    static getFavourites(req, res){
+        const userId = +req.user.id
+        Favourite.findAll({
+            where:{
+                userId
+            }
+        })
+        .then(data =>{
+            res.status(200).json(data)
+        })
+        .catch(err =>{
+            res.status(500).json({message: 'Internal Server Error'})
+        })
+    }
 
 }
 

@@ -9,7 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references:{
+          model:{
+            tableName: 'Users'
+          },
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       locationId: {
         type: Sequelize.INTEGER
@@ -30,6 +38,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       rating: {
+        type: Sequelize.STRING
+      },
+      description: {
         type: Sequelize.STRING
       },
       createdAt: {
