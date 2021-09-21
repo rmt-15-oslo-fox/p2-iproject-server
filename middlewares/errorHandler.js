@@ -3,11 +3,20 @@
 const errorHandler = (err, req, res, next) => {
     let code = 500;
     let message = [`Internal Server Error`]
-    // console.log(err);
+    // console.log(err.name);
 
     if(err.name === `SequelizeValidationError`){
         code = 400
-        message = err.errors[0].message
+        if(err.errors[0].message === 'Validation max on rating failed' ){
+          message = `Rating can't be higher than 5`
+        } 
+        else if(err.errors[0].message === 'Validation min on rating failed'){
+          message = `Rating can't be lower than 0`
+        }
+        else {
+          
+          message = err.errors[0].message
+        }
     }
     else if(err.name === `NOTFOUND`){
         code = err.code

@@ -1,8 +1,8 @@
-const { verify } = require(`../helper/jwt.js`)
+const { verify } = require(`../helpers/jwt.js`)
 const { User } = require(`../models`)
 
 const authentication = async (req, res, next) => {
-    const token = req.headers.accesstoken
+    const token = req.headers.access_token
     // console.log(token, `oiiiiiii`);
     //rubah token jadi payload
     try {

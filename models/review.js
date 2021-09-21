@@ -39,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: `Rating is required`
-        }
+        },
+        max: 5,
+        min: 0
       }
     },
     MovieId: {
