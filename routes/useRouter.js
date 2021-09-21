@@ -12,5 +12,6 @@ userRouter.patch(
   uploadUserAvatar,
   UserController.changeAvatarHandler
 );
+userRouter.get("/profile", UserController.getUserProfile);
 
 module.exports = userRouter;

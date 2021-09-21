@@ -23,6 +23,30 @@ class UserController {
       next(error);
     }
   }
+
+  static async getUserProfile(req, res, next) {
+    const { id, email } = req.user_login;
+    try {
+      const user = await User.findOne({
+        where: {
+          id,
+          email,
+        },
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt"],
+        },
+      });
+
+      res.status(200).json({
+        code: 200,
+        message: "Success get data user",
+        status: "success",
+        user: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;
