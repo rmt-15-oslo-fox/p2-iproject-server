@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "axios": "^0.21.4",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "google-auth-library": "^7.9.2",
+    "jest": "^27.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5",
+    "supertest": "^6.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "name": "p2-iproject-server",
+  "description": "Individual Portfolio Server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "bin": {
+    "p2-iproject-server": "www.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoenathanSent/p2-iproject-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoenathanSent/p2-iproject-server/issues"
+  },
+  "homepage": "https://github.com/JoenathanSent/p2-iproject-server#readme"
+}
