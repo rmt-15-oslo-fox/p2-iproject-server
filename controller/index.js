@@ -114,6 +114,22 @@ class Controller {
         }
     }
 
+    static async deleteTrip(req,res,next){
+        try {
+            const { TripId } = req.params
+            const UserId = req.userLogin.id
+            await GroupTrip.destroy({
+                where: {
+                    TripId,
+                    UserId
+                }
+            })
+            res.status(200).json({message: 'Trip was deleted'})
+        } catch (err) {
+            next(err)
+        }
+    }
+
 }
 
 module.exports = Controller

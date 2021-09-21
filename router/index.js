@@ -13,6 +13,7 @@ router.get('/mountains', Controller.getMountains)
 router.post('/addtrip', Controller.addTrip)
 router.get('/mytrip', Controller.getMyTrip)
 router.post('/jointrip', Controller.joinTrip)
+router.delete('/deleteTrip/:TripId', Controller.deleteTrip)
 
 
 router.use(errorHandler)
