@@ -56,8 +56,32 @@ class ProductController {
             next(err)
         }
     }
-}
 
-// 
+    static async changeCurrency(req, res, next) {
+        try {
+            const {currency} = req.body;
+
+            const options = {
+                method: 'GET',
+                url: 'https://currency-exchange.p.rapidapi.com/exchange',
+                params: {to: currency, from: 'SGD', q: '1.0'},
+                headers: {
+                    'x-rapidapi-host': 'currency-exchange.p.rapidapi.com',
+                    'x-rapidapi-key': 'c1db1a4c1amsh50f031aa3320911p12896cjsn8424f927f574'
+                }
+            };
+              
+            axios.request(options)
+                .then(function (resp) {
+                    res.status(200).json(resp.data.toFixed(2))
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        } catch (err) {
+            next(err)
+        }
+    }
+}
 
 module.exports = ProductController;
