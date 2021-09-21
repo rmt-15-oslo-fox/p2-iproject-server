@@ -6,6 +6,8 @@ router.post('/register', Controller.register)
 router.post('/login', Controller.login)
 router.get('/places', Controller.getPlaces)
 router.get('/restaurants', Controller.getRestaurant)
+router.get('/hotels', Controller.getHotels)
+router.get('/restaurants', Controller.getRestaurant)
 
 
 

@@ -110,6 +110,38 @@ class Controller{
         })
     }
 
+    static getHotels(req, res){
+        const page = +req.query.page || 1
+        const limit = +req.query.size || 8
+        const location_id = +req.query.location_id || 294229
+        const adults = +req.query.adults || 1
+        const rooms = +req.query.rooms || 1
+        const nights = +req.query.nights || 1
+        
+        let offset = (page - 1) * limit
+
+        axios({
+            method: "get",
+            url: `${rapidUrl}/hotels/list`,
+            headers: rapidHeaders,
+            params: {
+                location_id,
+                limit,
+                offset,
+                adults,
+                rooms,
+                nights
+            }
+        })
+        .then(response =>{
+            let result = response.data.data
+            res.status(200).json(result)
+        })
+        .catch(err =>{
+            res.status(500).json({message: 'Internal Server Error'})
+        })
+    }
+
     // static getFavourites(req, res){
     //     Favourite.findAll()
     //     .then(data =>{
