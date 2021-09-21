@@ -3,7 +3,6 @@ const Controller = require('../controller')
 const { authentication } = require('../middlewares/authentication')
 const errorHandler = require('../middlewares/errorHandler')
 
-
 router.post('/oauth', Controller.oauthlogin)
 router.get('/alltrip', Controller.getAllTrip)
 

@@ -34,7 +34,7 @@ class Controller {
 
             const token = signToken(jwtPayload)
 
-            res.status(201).json({ access_token: token, id:user.id })
+            res.status(201).json({ access_token: token, id:user.id, name:user.name })
 
         } catch (err) {
             next(err)
