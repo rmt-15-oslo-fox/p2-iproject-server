@@ -13,6 +13,11 @@ const errorHandler = (err, req, res, next) => {
             message = 'Authentication failed'
             break;
 
+        case 'JsonWebTokenError':
+            code = 400
+            message = 'Please Login First'
+            break;
+    
         case 'schedulenull':
             code = 400
             message = 'Pleese choose the date'
