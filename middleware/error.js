@@ -28,7 +28,6 @@ const errorHandler = (err, req, res, next) => {
       break;
     }
   }
-
   res.status(code).json({
     code: code,
     status: "fail",
