@@ -16,7 +16,7 @@ function date(value) {
   let month = months[value.getMonth()];
   let date = value.getDate();
   let convertedDate = "";
-  if (date === 11 || date === 12 || date === 13) {
+  if (date > 10 || date < 20) {
     convertedDate = `${date}th`;
   } else if (date % 10 === 1) {
     convertedDate = `${date}st`;
