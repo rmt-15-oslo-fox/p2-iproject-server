@@ -14,6 +14,7 @@ class UserController {
       res.status(200).json({
         code: 200,
         message: "Update avatar successful",
+        status: "success",
         user: {
           name: updatedUser.name,
           avatar_url: updatedUser.avatar_url,
