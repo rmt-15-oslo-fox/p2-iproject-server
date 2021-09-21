@@ -1,7 +1,8 @@
 const convertCurrency = require("../helpers/convertCurrency");
 const date = require("../helpers/date");
 const convertCurrency = require("../helpers/convertCurrency");
-const { Payment } = require("../models");
+const { User, Payment } = require("../models");
+const { JSONB } = require("sequelize/types");
 
 class PaymentController {
   static async reminderList(req, res, next) {
@@ -13,6 +14,80 @@ class PaymentController {
         message: "Succeded in getting all reminder",
         reminder,
       });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async pay(req, res, next) {
+    try {
+      const payment = await Payment.findByPk(req.params.id);
+      if (!payment) {
+        throw {
+          name: "Not Found",
+          message: `Reminder with ${req.params.id} not found`,
+        };
+      }
+      if (User.balance < req.body.amount) {
+        throw {
+          name: "Bad Request",
+          message: `You have insufficient balance`,
+        };
+      } else if (payment.amount <= req.body.amount) {
+        const user = await User.findByPk(req.login.id);
+        const newUserBalance = user.balance - payment.amount;
+        const receiver = await User.findByPk(payment.receiverId);
+        const newReceiverBalance = receiver.balance + payment.amount;
+        User.update(
+          { balance: newUserBalance },
+          {
+            where: { id: user.id },
+            returning: true,
+          }
+        );
+        User.update(
+          { balance: newReceiverBalance },
+          {
+            where: { id: receiver.id },
+            returning: true,
+          }
+        );
+        Payment.destroy({
+          where: { id: req.params.id },
+          returning: true,
+        });
+        res.status(200).json({ message: "Payment has been paid off" });
+      } else if (payment.amount > req.body.amount) {
+        const user = await User.findByPk(req.login.id);
+        const newUserBalance = user.balance - req.body.amount;
+        const receiver = await User.findByPk(payment.receiverId);
+        const newReceiverBalance = receiver.balance + req.body.amount;
+        const leftoverAmount = payment.amount - req.body.amount;
+        User.update(
+          { balance: newUserBalance },
+          {
+            where: { id: user.id },
+            returning: true,
+          }
+        );
+        User.update(
+          { balance: newReceiverBalance },
+          {
+            where: { id: receiver.id },
+            returning: true,
+          }
+        );
+        Payment.update(
+          { amount: leftoverAmount },
+          {
+            where: { id: req.params.id },
+            returning: true,
+          }
+        );
+        res
+          .status(200)
+          .json({ message: "Payment has been partially paid off" });
+      }
     } catch (err) {
       next(err);
     }
