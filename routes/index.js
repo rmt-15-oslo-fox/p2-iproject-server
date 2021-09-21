@@ -5,6 +5,7 @@ const Controller = require('../controllers/controller')
 router.post('/register', Controller.register)
 router.post('/login', Controller.login)
 router.get('/places', Controller.getPlaces)
+router.get('/restaurants', Controller.getRestaurant)
 
 
 
