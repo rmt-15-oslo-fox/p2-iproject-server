@@ -79,7 +79,13 @@ Base URL: http://localhost:300
   "code": 200,
   "status": "success",
   "message": "Login successful",
-  "access_token": "<jwt token>"
+  "access_token": "<jwt token>",
+  "user": {
+    "id": "number",
+    "email": "string",
+    "avatar_url": "string",
+    "name": "string"
+  }
 }
 ```
 
