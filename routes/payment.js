@@ -5,7 +5,8 @@ const authorization = require("../middlewares/authorization");
 
 router.get("/", paymentController.reminderList);
 router.post("/", paymentController.addReminder);
-router.delete("/", authorization, paymentController.clearPayment);
+router.post("/", paymentController.addBalance);
+router.put("/:id", authorization, paymentController.pay);
 router.post("/", paymentController.convertCurrency);
 
 module.exports = router;

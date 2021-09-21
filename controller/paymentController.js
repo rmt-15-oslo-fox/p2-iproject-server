@@ -93,6 +93,18 @@ class PaymentController {
     }
   }
 
+  static async addBalance(req, res, next) {
+    const { amount } = req.body;
+    const user = User.findByPk(req.login.id);
+    const newBalance = user.balance + amount;
+    User.update(
+      { balance: newBalance },
+      {
+        where: { id: req.login.id },
+      }
+    );
+  }
+
   static async addReminder(req, res, next) {
     const data = {
       userId: req.login.id,
