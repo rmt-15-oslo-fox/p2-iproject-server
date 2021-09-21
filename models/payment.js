@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Payment extends Model {
     /**
@@ -12,16 +10,66 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  Payment.init({
-    userId: DataTypes.INTEGER,
-    receiverId: DataTypes.INTEGER,
-    amount: DataTypes.INTEGER,
-    description: DataTypes.INTEGER,
-    deadline: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Payment',
-  });
+  }
+  Payment.init(
+    {
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      receiverId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT RECEIVER ID",
+          },
+          notNull: {
+            msg: "PLEASE INSERT RECEIVER ID",
+          },
+        },
+      },
+      amount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+          notNull: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+          notNull: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+        },
+      },
+      deadline: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+          notNull: {
+            msg: "PLEASE INSERT AMOUNT",
+          },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Payment",
+    }
+  );
   return Payment;
 };
