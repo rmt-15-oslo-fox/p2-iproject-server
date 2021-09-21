@@ -60,6 +60,12 @@ class AuthController {
         status: "success",
         message: "Login successful",
         access_token: token,
+        user: {
+          id: user.id,
+          name: user.name,
+          avatar_url: user.avatar_url,
+          email: user.email,
+        },
       });
     } catch (err) {
       next(err);
