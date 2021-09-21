@@ -10,6 +10,9 @@ function errorHandler(err, req, res, next) {
     } else if (err.name === "ProductNotFound") {
         code = 404;
         message = [err.message];
+    } else if(err.name === "authentication") {
+        code = 401;
+        message = [err.message];
     }
   
     res.status(code).json({ message });

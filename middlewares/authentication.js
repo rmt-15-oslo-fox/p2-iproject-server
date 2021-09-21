@@ -5,14 +5,13 @@ async function authentication(req, res, next) {
     try {
         const token = req.headers.access_token; 
         const payload = verify(token);
-        
+
         const foundUser = await User.findOne({
             where: {
-                id: payload.id,
                 email: payload.email
             }
         })
-
+        
         if (!foundUser) {
             throw {
                 name: "authentication",

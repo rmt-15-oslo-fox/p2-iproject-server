@@ -15,9 +15,11 @@ class WishlistController {
     static async wishlists(req, res, next) {
         try {
             const UserId = req.user.id;
-
+            
             const products = await Wishlist.findAll({
-                where: UserId
+                where: {
+                    UserId
+                }
             })
             res.status(200).json(products)
         } catch (err) {

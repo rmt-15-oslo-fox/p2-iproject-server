@@ -37,6 +37,7 @@ class UserController {
                     res.status(200).json({ 
                         userId: user.id,
                         email: user.email,
+                        username: user.username,
                         access_token
                     });
                 } else {
