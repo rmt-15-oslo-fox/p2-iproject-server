@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Trip.hasOne(models.Mountain, {foreignKey: 'MountId'})
+      // Trip.belongsToMany(models.User, {through: 'GroupTrip'})
+      // Trip.belongsTo(models.GroupTrip, {foreignKey: 'TripId'})
+      Trip.belongsTo(models.Mountain, {foreignKey: 'MountId'})
+      Trip.belongsTo(models.Track, {foreignKey: 'TrackId'})
+      Trip.belongsToMany(models.User, {through: 'GroupTrips'})
     }
   };
   Trip.init({
