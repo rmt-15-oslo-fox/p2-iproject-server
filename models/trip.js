@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, DATE
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Trip extends Model {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     schedule: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     status: {
       type: DataTypes.BOOLEAN

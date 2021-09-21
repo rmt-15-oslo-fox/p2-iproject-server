@@ -30,7 +30,7 @@ module.exports = {
       },
       schedule: {
         allowNull: false,
-        type: Sequelize.TIME
+        type: Sequelize.DATEONLY
       },
       status: {
         type: Sequelize.BOOLEAN

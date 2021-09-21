@@ -1,6 +1,6 @@
 const { signToken } = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library')
-const { User, Mountain, Trip } = require('../models')
+const { User, Mountain, Trip, GroupTrip } = require('../models')
 
 class Controller {
     static async oauthlogin(req, res, next) {
@@ -53,11 +53,19 @@ class Controller {
 
     static async addTrip(req, res, next){
         try {
-            const { MountId, TrackId, schedule } = req.body
+            let { MountId, TrackId, schedule } = req.body
+            if(schedule == null){
+                throw {name: 'schedulenull'}
+            }
+            schedule = new Date(schedule)
             const tripCreated = await Trip.create({
                 MountId,
                 TrackId,
                 schedule
+            })
+            const userTrip = await GroupTrip.create({
+                TripId: tripCreated.id,
+                UserId: req.userLogin.id
             })
             res.status(201).json(tripCreated)
         } catch (err) {
