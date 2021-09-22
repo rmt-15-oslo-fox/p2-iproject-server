@@ -4,7 +4,8 @@
   "description": "Individual Portfolio Server",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --runInBand --detectOpenHandles --forceExit"
+    "test": "npx jest --runInBand --detectOpenHandles --forceExit",
+    "start": "node bin/www"
   },
   "repository": {
     "type": "git",
