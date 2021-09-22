@@ -14,7 +14,9 @@ router.get('/mytrip', Controller.getMyTrip)
 router.post('/jointrip', Controller.joinTrip)
 router.delete('/deleteTrip/:TripId', Controller.deleteTrip)
 router.get('/weather', Controller.getWeather)
-
+router.post('/equipment', Controller.postEquipment)
+router.get('/equipment/:tripid', Controller.getEquipmentById)
+router.post('/equipmentuser', Controller.postPJEquipment)
 
 router.use(errorHandler)
 

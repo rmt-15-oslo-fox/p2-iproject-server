@@ -1,6 +1,6 @@
 const { signToken } = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library')
-const { User, Mountain, Trip, GroupTrip } = require('../models')
+const { User, Mountain, Trip, GroupTrip, Equipment, EquipmentUser } = require('../models')
 const { Op } = require('sequelize')
 const geoCodingAPI = require('../apis/geoCodingAPI')
 const weatherAPI = require('../apis/openWeatherAPI')
@@ -134,7 +134,7 @@ class Controller {
 
   static async getWeather(req, res, next) {
     try {
-      const { location } = req.body
+      const { location } = req.query
       const loc = await geoCodingAPI.get('', {
         params: {
           address: location
@@ -167,6 +167,96 @@ class Controller {
         }
       })
       res.status(200).json(weather)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async postEquipment(req, res, next){
+    try {
+      const {TripId, list} = req.body
+      const listItem = Object.keys(list)
+      
+      listItem.forEach(async el => {
+        const isDuplicate = await Equipment.findOne({
+          where: {
+            TripId,
+            name: el
+          }
+        })
+        if(!isDuplicate){
+          await Equipment.create({
+            TripId,
+            name: el,
+            jumlah: list[el]
+          })
+        } else {
+          await Equipment.update({
+            jumlah: +(list[el]) + +(isDuplicate.jumlah)
+          },{
+            where: {
+              id: isDuplicate.id
+            }
+          })
+        }
+      })
+      res.status(200).json({message: 'Success add equipment'})
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async getEquipmentById(req, res, next){
+    try {
+      const TripId = req.params.tripid
+      const response = await Equipment.findAll({
+        where: {
+          TripId
+        },
+        include: {
+          model: User,
+          include: {
+            model: EquipmentUser
+          }
+        },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      },{
+        order: ['createdAt', 'ASC']
+      })
+      res.status(200).json(response)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async postPJEquipment(req, res, next){
+    try {
+      const {EquipmentId, UserId} = req.body
+      const isExist = await EquipmentUser.findOne({
+        where: {
+          EquipmentId,
+          UserId
+        }
+      })
+      if(isExist){
+        await EquipmentUser.update({
+          jumlah: +(isExist.jumlah) + 1
+        }, {
+          where: {
+            EquipmentId,
+            UserId
+          }
+        })
+      } else {
+        await EquipmentUser.create({
+          EquipmentId,
+          UserId,
+          jumlah: 1
+        })
+      }
+      res.status(201).json({message: 'success'})
     } catch (err) {
       next(err)
     }
