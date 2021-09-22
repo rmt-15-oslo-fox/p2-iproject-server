@@ -1,4 +1,5 @@
 function errorHandle(err, req, res, next) {
+  console.log(err, "<<<<<<<<<<<");
   let code = 500
   let message = "Internal server error"
 
@@ -14,6 +15,11 @@ function errorHandle(err, req, res, next) {
     case "NotMatchedUserError":
       code = 401
       message = err.message
+      break;
+    case "NotFoundSparringError":
+      code = 404
+      message = err.message
+      break;
     default:
       break;
   }
