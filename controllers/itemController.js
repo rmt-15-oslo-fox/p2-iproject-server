@@ -22,6 +22,8 @@ class ItemController {
                 description,
                 tag,
                 UserId: id
+            }, {
+                include: [User]
             })
             if (result) {
                 res.status(201).json(result)
