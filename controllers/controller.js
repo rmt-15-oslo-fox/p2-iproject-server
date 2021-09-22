@@ -68,6 +68,22 @@ class Controller {
       next(error);
     }
   }
+
+  static async getAllCategories(req, res, next) {
+    try {
+      const categories = await Category.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      res.status(200).json({
+        code: 200,
+        message: "success get categories",
+        status: "success",
+        categories: categories,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = Controller;

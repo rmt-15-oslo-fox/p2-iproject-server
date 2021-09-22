@@ -61,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           isIn: {
-            args: ["Beginner", "Medium", "Expert"],
+            args: [["Beginner", "Medium", "Expert"]],
+            msg: "Must be Beginner or Medium or Expert",
           },
           notEmpty: {
             msg: "Course Level is required",

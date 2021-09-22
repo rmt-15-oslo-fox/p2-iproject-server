@@ -5,20 +5,11 @@ const { Category, Course, User, UserCourse } = require("../models");
 class CourseController {
   static async createCourse(req, res, next) {
     const { id: instructorId } = req.user_login;
-    const { category } = req.body;
-
-    const convertToNumber = Number(category);
-
     try {
       if (!req.file) {
         throw {
           name: "Course Error",
         };
-      }
-
-      if (!convertToNumber) {
-        const newCategory = await Category.create({ name: category });
-        req.body.category = newCategory.id;
       }
 
       const newCourse = await Course.create({

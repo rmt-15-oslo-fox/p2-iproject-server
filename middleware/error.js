@@ -7,13 +7,13 @@ const errorHandler = (err, req, res, next) => {
     case "SequelizeUniqueConstraintError": {
       code = 400;
       errors.push("Email is already exists");
-      message = "Registration failed";
+      message = "Bad Request";
       break;
     }
     case "SequelizeValidationError": {
       code = 400;
       errors = err.errors.map((e) => e.message);
-      message = "Registration failed";
+      message = "Bad Request";
       break;
     }
 
