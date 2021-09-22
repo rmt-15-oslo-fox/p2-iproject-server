@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
-    artikelId: DataTypes.INTEGER
+    artikelId: DataTypes.INTEGER,
+    updatedBy: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'History',

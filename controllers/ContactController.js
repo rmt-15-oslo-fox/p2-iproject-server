@@ -6,7 +6,11 @@ class ContactController {
 
     static async getContact(req, res, next) {
         try {
-            const allContact = await Contact.findAll()
+            const allContact = await Contact.findAll({
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                }
+            })
             if (allContact) {
                 res.status(200).json(allContact)
             } else {

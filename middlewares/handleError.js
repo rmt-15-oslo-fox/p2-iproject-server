@@ -1,9 +1,13 @@
 const handleError = (err, req, res, next) => {
     let code = 500;
-    let message = err;
+    let message = err.name;
 
     switch (err.name) {
         case "imageError":
+            code = 400;
+            message = [err.errors];
+            break;
+        case "SequelizeValidationError":
             code = 400;
             message = [err.errors];
             break;

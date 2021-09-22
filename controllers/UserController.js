@@ -15,7 +15,11 @@ class UserController {
 
     static async getUser(req, res, next) {
         try {
-            const data = await User.findAll()
+            const data = await User.findAll({
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            })
             res.status(200).json(data)
         } catch (error) {
             next(error)
