@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Watchlist.belongsTo(models.User, {foreignKey: 'userId'})
     }
   };
   Watchlist.init({
-    userId: DataTypes.INTEGER,
-    stockId: DataTypes.INTEGER
+    stockName: DataTypes.STRING,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Watchlist',
