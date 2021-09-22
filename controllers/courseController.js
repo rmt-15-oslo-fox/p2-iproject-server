@@ -1,4 +1,7 @@
-const { Category, Course, User } = require("../models");
+const { nanoid } = require("nanoid");
+const createTransaction = require("../helpers/midtrans");
+const calculateTotalPrice = require("../helpers/calculateTotalPrice");
+const { Category, Course, User, UserCourse } = require("../models");
 class CourseController {
   static async createCourse(req, res, next) {
     const { id: instructorId } = req.user_login;
@@ -74,6 +77,93 @@ class CourseController {
       });
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async checkoutCourse(req, res, next) {
+    const { coursesIds } = req.body;
+    try {
+      const courses = await Course.findAll({
+        where: {
+          id: coursesIds,
+        },
+      });
+
+      if (courses.length === 0 || courses.length !== coursesIds.length) {
+        throw {
+          name: "Course Not Found",
+        };
+      }
+
+      const totalPrice = calculateTotalPrice(courses);
+      const order_id = nanoid(30);
+      const items_detail = courses.map((e) => {
+        return {
+          price: e.price,
+          title: e.title,
+          quantity: 1,
+        };
+      });
+
+      const parameter = {
+        transaction_details: {
+          order_id: order_id,
+          gross_amount: totalPrice,
+        },
+        credit_card: {
+          secure: true,
+        },
+        items_detail: items_detail,
+        customer_details: {
+          first_name: req.user_login.name,
+          email: req.user_login.email,
+        },
+        callbacks: {
+          finish: "http://localhost:8080/",
+        },
+      };
+      const results = await createTransaction(parameter);
+
+      const payload = courses.map((course) => {
+        return {
+          UserId: req.user_login.id,
+          CourseId: course.id,
+          status: "pending",
+          order_id: order_id,
+        };
+      });
+      await UserCourse.bulkCreate(payload);
+      res.status(201).json({
+        code: 201,
+        message: "success create new transaction",
+        token: results.token,
+        redirect_url: results.redirect_url,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async notifMidtransHandler(req, res, next) {
+    const { transaction_status, order_id, gross_amount } = req.body;
+
+    try {
+      if (
+        transaction_status === "settlement" ||
+        transaction_status === "capture"
+      ) {
+        const results = await UserCourse.update({
+          status: "active",
+          where: {
+            order_id,
+          },
+          returning: true,
+        });
+        console.log(results);
+      }
+      res.status(200);
+    } catch (err) {
+      next(err);
     }
   }
 }

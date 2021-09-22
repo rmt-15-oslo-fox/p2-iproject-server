@@ -52,6 +52,13 @@ const errorHandler = (err, req, res, next) => {
       message = "failed delete create";
       break;
     }
+
+    case "Course Not Found": {
+      code = 404;
+      errors = ["Courses not found"];
+      message = "failed checkout courses";
+      break;
+    }
     default: {
       break;
     }
