@@ -1,0 +1,32 @@
+[
+  {
+    "teamName": "Real Madrid",
+    "teamLogo": "https://i.pinimg.com/736x/44/f0/e4/44f0e4c5a40e82c35d7660aa16bceb93.jpg",
+    "description": "50/50, main sportif",
+    "schedule": "Kamis, 30 September 2021, 19:00 WIB",
+    "location": "Lapangan banteng, Jakpus",
+    "status": "Active",
+    "CategoryId": 2,
+    "AuthorId": 8
+  },
+  {
+    "teamName": "Barcelona",
+    "teamLogo": "https://upload.wikimedia.org/wikipedia/id/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png",
+    "description": "50/50, main sportif",
+    "schedule": "Kamis, 30 September 2021, 20:00 WIB",
+    "location": "Lapangan banteng, Jakpus",
+    "status": "Active",
+    "CategoryId": 1,
+    "AuthorId": 4
+  },
+  {
+    "teamName": "PSG",
+    "teamLogo": "https://e7.pngegg.com/pngimages/306/266/png-clipart-paris-saint-germain-f-c-paris-saint-germain-academy-paris-saint-germain-feminines-paris-saint-germain-esports-paris-emblem-label.png",
+    "description": "50/50, main sportif",
+    "schedule": "Kamis, 30 September 2021, 21:00 WIB",
+    "location": "Lapangan banteng, Jakpus",
+    "status": "Active",
+    "CategoryId": 2,
+    "AuthorId": 1
+  }
+]
