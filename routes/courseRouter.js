@@ -12,5 +12,6 @@ courseRouter.post(
   uploadThumbnail,
   CourseController.createCourse
 );
+courseRouter.get("/", CourseController.getAllCourseByUserLogin);
 
 module.exports = courseRouter;

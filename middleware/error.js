@@ -29,6 +29,15 @@ const errorHandler = (err, req, res, next) => {
       message = "Create course failed";
       break;
     }
+
+    case "Invalid Token":
+
+    case "JsonWebTokenError": {
+      code = 401;
+      errors = ["Invalid Token"];
+      message = "Authentication Failed";
+      break;
+    }
     default: {
       break;
     }

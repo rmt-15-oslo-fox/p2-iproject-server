@@ -1,4 +1,4 @@
-const { Category, Course } = require("../models");
+const { Category, Course, User } = require("../models");
 class CourseController {
   static async createCourse(req, res, next) {
     const { id: instructorId } = req.user_login;
@@ -36,6 +36,41 @@ class CourseController {
           id: newCourse.id,
           title: newCourse.title,
         },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAllCourseByUserLogin(req, res, next) {
+    try {
+      const { id } = req.user_login;
+
+      const courses = await Course.findAll({
+        where: {
+          instructor_id: id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password", "createdAt", "updatedAt", "email"],
+            },
+            as: "Instructor",
+          },
+          {
+            model: Category,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      });
+      res.status(200).json({
+        code: 200,
+        message: "success get all courses",
+        status: "success",
+        courses: courses,
       });
     } catch (error) {
       next(error);
