@@ -38,6 +38,20 @@ const errorHandler = (err, req, res, next) => {
       message = "Authentication Failed";
       break;
     }
+
+    case "Course Already Exists in Cart": {
+      code = 400;
+      errors = ["Course Already Exists in Cart"];
+      message = "Failed add new item to cart";
+      break;
+    }
+
+    case "Cart Not Found": {
+      code = 404;
+      errors = ["Cart not found"];
+      message = "failed delete create";
+      break;
+    }
     default: {
       break;
     }
