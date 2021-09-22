@@ -23,7 +23,12 @@ const errorHandler = (err, req, res, next) => {
       message = "Login failed";
       break;
     }
-
+    case "Course Error": {
+      code = 400;
+      errors = ["Course thumbnail is required"];
+      message = "Create course failed";
+      break;
+    }
     default: {
       break;
     }

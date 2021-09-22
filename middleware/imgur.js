@@ -1,6 +1,6 @@
 const FormData = require("form-data");
 const { imgurApi } = require("../apis/axios");
-const uploadUserAvatar = async (req, res, next) => {
+const uploadImage = async (req, res, next) => {
   if (!req.file) {
     next();
   } else {
@@ -32,4 +32,4 @@ const uploadUserAvatar = async (req, res, next) => {
   }
 };
 
-module.exports = uploadUserAvatar;
+module.exports = uploadImage;
