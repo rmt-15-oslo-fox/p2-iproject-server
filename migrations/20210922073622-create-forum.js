@@ -1,21 +1,28 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Demos', {
+    await queryInterface.createTable('Forums', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      balance: {
-        type: Sequelize.INTEGER
+      stockName: {
+        type: Sequelize.STRING
+      },
+      comment: {
+        type: Sequelize.STRING
+      },
+      commentator: {
+        type: Sequelize.STRING
       },
       userId: {
-        type: Sequelize.INTEGER
-      },
-      stockId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Demos');
+    await queryInterface.dropTable('Forums');
   }
 };
