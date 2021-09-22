@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hash } = require("../helpers/bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -80,7 +81,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       balance: {
         type: DataTypes.STRING,
-        allowNull: false,
         validate: {
           min: 0,
         },

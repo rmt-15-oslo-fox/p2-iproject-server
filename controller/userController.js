@@ -41,16 +41,15 @@ class UserController {
   }
 
   static async register(req, res, next) {
-    const { username, password, email } = req.body;
+    const { username, password, email, name } = req.body;
     const newUser = {
       username,
       password,
       email,
+      name,
     };
-
     try {
       const user = await User.create(newUser);
-
       if (user) {
         res.status(201).json({
           code: 201,
@@ -60,6 +59,7 @@ class UserController {
               id: user.id,
               username: user.username,
               email: user.email,
+              name: user.name,
             },
           },
         });
