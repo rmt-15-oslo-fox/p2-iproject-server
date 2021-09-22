@@ -262,6 +262,52 @@ class Controller {
       next(err)
     }
   }
+
+  static async deleteEquipmentUser(req, res, next){
+    try {
+      const {EquipmentId, UserId} = req.query
+      const isExist = await EquipmentUser.findOne({
+        where: {
+          EquipmentId,
+          UserId
+        }
+      })
+      if(isExist.jumlah > 1){
+        await EquipmentUser.update({
+          jumlah: +(isExist.jumlah) - 1
+        }, {
+          where: {
+            EquipmentId,
+            UserId
+          }
+        })
+      } else {
+        await EquipmentUser.destroy({
+          where: {
+            EquipmentId,
+            UserId
+          }
+        })
+      }
+      res.status(201).json({message: 'success'})
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async deleteEquipment(req, res, next){
+    try {
+      const { EquipmentId } = req.query
+      await Equipment.destroy({
+        where: {
+          id: EquipmentId
+        }
+      })
+      res.status(200).json({message: 'success deleted'})
+    } catch (err) {
+      next(err)
+    }
+  }
 }
 
 module.exports = Controller
