@@ -8,12 +8,17 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-function sendEmail(email) {
+function sendEmail(email, name, price, color) {
     const options = {
-        from: "'MeatBox' <no-reply@gmail.com>",
+        from: "'Hacktiv Store' <no-reply@gmail.com>",
         to: email,
-        subject: "Pesanan MeatBox",
-        text: "Pesanan Anda sedang dalam perjalanan"
+        subject: "Your Wishlist",
+        text: `
+        ${name} was added to your Wishlist
+            Product Name: ${name}
+            Price: ${price}
+            Color: ${color}
+        `
     };
 
     transporter.sendMail(options, (err, info) => {

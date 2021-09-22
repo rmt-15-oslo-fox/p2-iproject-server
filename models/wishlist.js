@@ -24,14 +24,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: {
           msg: 'Price is required'
         }
       }
     },
-    imagerUrl: {
+    imageUrl: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
@@ -44,6 +44,14 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: 'Color is required'
+        }
+      }
+    },
+    code: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Code is required'
         }
       }
     }
