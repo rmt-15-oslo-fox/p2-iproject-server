@@ -21,6 +21,9 @@ module.exports = {
       birthDate: {
         type: Sequelize.DATE,
       },
+      city: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

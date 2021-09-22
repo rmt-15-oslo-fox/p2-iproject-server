@@ -5,12 +5,13 @@ const { signPayload } = require("../helpers/jwt");
 class UserController {
   static async registerUser(req, res, next) {
     try {
-      const { username, email, password, birthDate } = req.body;
+      const { username, email, password, birthDate, city } = req.body;
       const createUser = await User.create({
         username,
         email,
         password,
         birthDate,
+        city,
       });
 
       if (!createUser) {
@@ -24,6 +25,7 @@ class UserController {
         username: createUser.username,
         email: createUser.email,
         birthDate: createUser.birthDate,
+        city: createUser.city,
       });
     } catch (err) {
       // console.log(err);
