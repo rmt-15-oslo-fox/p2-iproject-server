@@ -28,7 +28,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      schedule: {
+      start_date: {
+        allowNull: false,
+        type: Sequelize.DATEONLY
+      },
+      end_date: {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
