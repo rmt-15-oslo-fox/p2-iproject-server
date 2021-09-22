@@ -221,6 +221,21 @@ class PaymentController {
       next(err);
     }
   }
+
+  static async getReminderById(req, res, next) {
+    try {
+      const data = await Payment.findByPk(req.params.id);
+      if (!data) {
+        throw {
+          name: "Not Found",
+          message: `reminder with ${req.params.id} not found`,
+        };
+      }
+      res.status(200).json(data);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = PaymentController;
