@@ -24,6 +24,26 @@ class CartController {
     }
   }
 
+  static async clearCart(req, res, next) {
+    const { id: UserId } = req.user_login;
+
+    try {
+      const result = await Cart.destroy({
+        where: {
+          UserId,
+        },
+      });
+      console.log(result);
+      res.status(200).json({
+        code: 200,
+        message: `success clear cart by user with id ${UserId}`,
+        status: "success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async getCartByUserLoggedIn(req, res, next) {
     const { id: UserId } = req.user_login;
 

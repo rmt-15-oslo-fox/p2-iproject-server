@@ -4,7 +4,8 @@
   "description": "Individual Portfolio Server",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --runInBand --detectOpenHandles --forceExit"
+    "test": "npx jest --runInBand --detectOpenHandles --forceExit",
+    "start": "node bin/www"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,12 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
+    "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
+    "midtrans-client": "^1.2.5",
     "multer": "^1.4.3",
+    "nanoid": "^3.1.25",
+    "npm": "^7.24.0",
     "pg": "^8.7.1",
     "sequelize": "^6.6.5"
   },

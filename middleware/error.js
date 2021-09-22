@@ -7,13 +7,13 @@ const errorHandler = (err, req, res, next) => {
     case "SequelizeUniqueConstraintError": {
       code = 400;
       errors.push("Email is already exists");
-      message = "Registration failed";
+      message = "Bad Request";
       break;
     }
     case "SequelizeValidationError": {
       code = 400;
       errors = err.errors.map((e) => e.message);
-      message = "Registration failed";
+      message = "Bad Request";
       break;
     }
 
@@ -50,6 +50,13 @@ const errorHandler = (err, req, res, next) => {
       code = 404;
       errors = ["Cart not found"];
       message = "failed delete create";
+      break;
+    }
+
+    case "Course Not Found": {
+      code = 404;
+      errors = ["Courses not found"];
+      message = "failed checkout courses";
       break;
     }
     default: {

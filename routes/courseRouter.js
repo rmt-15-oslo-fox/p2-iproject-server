@@ -4,7 +4,6 @@ const authenticationUser = require("../middleware/authenticationUser");
 const uploadThumbnail = require("../middleware/imgur");
 const fileUpload = require("../middleware/multer");
 const courseRouter = Router();
-
 courseRouter.use(authenticationUser);
 courseRouter.post(
   "/",

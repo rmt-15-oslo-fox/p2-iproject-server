@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Name is required",
           },
-          min: {
+          len: {
             args: [3],
             msg: "Your name is too short! You need 3+ characters",
           },
