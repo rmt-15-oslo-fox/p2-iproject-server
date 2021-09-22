@@ -1,17 +1,17 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "spartan",
-    "host": "127.0.0.1",
+    "password": "123456",
+    "database": "simple-admin-dahsboard",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "spartan_test",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
     "username": "root",

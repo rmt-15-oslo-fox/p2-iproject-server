@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { hashPassword } = require('../helpers/bcrypt');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,68 +12,49 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Sparring, { foreignKey: "AuthorId" })
-      User.hasOne(models.UserSparrings, { foreignKey: "UserId" })
+      User.hasMany(models.Item)
     }
   };
   User.init({
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Username cannot be null"
-        },
-        notEmpty: {
-          args: true,
-          msg: "Username is required"
-        },
-      },
-      unique: {
-        args: true,
-        msg: "Username is already exists"
-      }
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        notNull: {
-          args: true,
-          msg: "User.email cannot be null"
-        },
-        notEmpty: {
-          args: true,
+        isEmail: {
           msg: "Invalid email format"
         },
-      },
-      isEmail: {
-        args: true,
-        msg: "Invalid email format"
-      },
-      unique: {
-        args: true,
-        msg: "Email is already exists"
+        notEmpty: {
+          msg: "Please input your email"
+        },
+        notNull: {
+          msg: "Please input your email"
+        }
       }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          args: true,
-          msg: "Password cannot be null"
-        },
         notEmpty: {
-          args: true,
-          msg: "Password is required"
+          msg: "Please input your password"
         },
+        notNull: {
+          msg: "Please input your password"
+        }
       }
-    }
+    },
+    city: DataTypes.STRING,
+    country: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
+    hooks: {
+      beforeCreate: (user, options) => {
+        const hashedPassword = hashPassword(user.password) 
+        user.password = hashedPassword
+      }
+    }
   });
   return User;
 };

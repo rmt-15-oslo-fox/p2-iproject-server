@@ -1,8 +1,17 @@
 'use strict';
 
+const { hashPassword } = require("../helpers/bcrypt");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert("Users", [{
+      email: "radit@mail.com",
+      password: hashPassword("123456"),
+      city: "Jakarta",
+      country: "Indonesia",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }])
     /**
      * Add seed commands here.
      *
@@ -12,35 +21,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
-
-    const data = [
-      {
-        "name": "Futsal"
-      },
-      {
-        "name": "Basket"
-      },
-      {
-        "name": "Sepak bola"
-      }
-    ]
-    data.map(el => {
-      el.createdAt = new Date()
-      el.updatedAt = new Date()
-    })
-
-    await queryInterface.bulkInsert("Categories", data, {})
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete("Users", null, {})
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-
-    await queryInterface.bulkDelete("Categories", null, {})
   }
 };
