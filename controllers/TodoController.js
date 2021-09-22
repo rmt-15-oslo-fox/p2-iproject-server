@@ -3,11 +3,12 @@ const axios = require("axios");
 
 class TodoController {
   static async createTodo(req, res, next) {
+    console.log(req.body);
     try {
       const id = +req.params.id;
       const userIdLogin = req.user.id;
       // console.log(id, userIdLogin);
-      const { task, description } = req.body;
+      const { task, description, deadline } = req.body;
       const tag = req.body.tag.split(", ");
 
       if (id !== userIdLogin) {
@@ -20,6 +21,7 @@ class TodoController {
         task,
         description,
         tag,
+        deadline,
         isComplete: false,
         UserId: id,
       });
@@ -102,7 +104,7 @@ class TodoController {
 
   static async editUserTodos(req, res, next) {
     const id = +req.params.id;
-    const { task, description } = req.body;
+    const { task, description, deadline } = req.body;
     const tag = req.body.tag.split(", ");
     try {
       const findTodos = await Todo.findByPk(id);
@@ -119,6 +121,7 @@ class TodoController {
           task: task,
           description: description,
           tag: tag,
+          deadline: deadline,
         },
         {
           where: {
