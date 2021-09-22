@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userRoutes = require("./user");
+const listRoutes = require("./payment");
 const { authentication } = require("../middleware/authentication");
 const errHandler = require("../middleware/errHandler");
 

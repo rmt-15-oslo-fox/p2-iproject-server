@@ -52,11 +52,17 @@ class PaymentController {
             returning: true,
           }
         );
-        Payment.destroy({
-          where: { id: req.params.id },
-          returning: true,
-        });
-        res.status(200).json({ message: "Payment has been paid off" });
+        Payment.update(
+          {
+            amount: 0,
+            status: "Paid off",
+          },
+          {
+            where: { id: req.params.id },
+            returning: true,
+          }
+        );
+        res.status(200).json({ message: "Payment success" });
       } else if (payment.amount > req.body.amount) {
         const user = await User.findByPk(req.login.id);
         const newUserBalance = user.balance - req.body.amount;
@@ -84,9 +90,7 @@ class PaymentController {
             returning: true,
           }
         );
-        res
-          .status(200)
-          .json({ message: "Payment has been partially paid off" });
+        res.status(200).json({ message: "Payment success" });
       }
     } catch (err) {
       next(err);
@@ -112,6 +116,7 @@ class PaymentController {
       amount: req.body.amount,
       description: req.body.description,
       deadline: req.body.deadline,
+      status: "active",
     };
     try {
       const addReminder = await Payment.create(data);
@@ -122,8 +127,21 @@ class PaymentController {
           amount: addReminder.amount,
           description: addReminder.description,
           deadline: date(addReminder.deadline),
+          status: addReminder.status,
         });
       }
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async deletePayment(req, res, next) {
+    try {
+      Payment.destroy({
+        where: { id: req.params.id },
+        returning: true,
+      });
+      res.status(200).json({ message: "Payment reminder deleted" });
     } catch (err) {
       next(err);
     }
