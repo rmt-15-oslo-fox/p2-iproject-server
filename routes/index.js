@@ -8,9 +8,10 @@ const router = require("express").Router();
 
 router.post("/register", UserController.registerUser);
 router.post("/login", UserController.loginHandler);
-router.use(authentication);
 router.get("/users", UserController.getAllUser);
+router.use(authentication);
 
+router.get("/weather", TodoController.getWeatherForecast);
 router.get("/todos/:id", TodoController.getUserTodos);
 router.get("/todos/complete/:id", TodoController.getUserTodosComplete); //menampilkan halaman yg udh complete
 router.post("/todos/:id", TodoController.createTodo);

@@ -33,6 +33,7 @@ const authentication = async (req, res, next) => {
       id: foundUser.id,
       username: foundUser.username,
       email: foundUser.email,
+      city: foundUser.city,
     };
 
     // console.log(req.user);

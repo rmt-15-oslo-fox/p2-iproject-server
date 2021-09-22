@@ -1,4 +1,5 @@
 const { Todo, User } = require("../models");
+const axios = require("axios");
 
 class TodoController {
   static async createTodo(req, res, next) {
@@ -204,6 +205,23 @@ class TodoController {
         code: 200,
         msg: `Task with id ${id} is updated successfully`,
         data: updateStatusTodo,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  //third party API
+  static async getWeatherForecast(req, res, next) {
+    try {
+      const city = req.user.city;
+      const response = await axios({
+        method: "GET",
+        baseURL: `http://api.weatherapi.com/v1/current.json?key=be79306e2ba647f291b24040212109&q=${city}&aqi=no`,
+      });
+      res.status(200).json({
+        location: response.data.location,
+        current: response.data.current,
       });
     } catch (err) {
       next(err);
