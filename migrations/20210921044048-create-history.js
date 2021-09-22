@@ -11,7 +11,13 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
-      artikelId: {
+      title: {
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING
+      },
+      updatedBy: {
         type: Sequelize.INTEGER
       },
       createdAt: {

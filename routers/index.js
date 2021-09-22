@@ -4,7 +4,7 @@ const HistoryRoute = require('./HistoryRoute');
 const ContactRoute = require('./ContactRoute');
 const router = require('express').Router();
 const authentication = require('../middlewares/authentication');
-const errorHandler = require('../middlewares/errorHandler');
+const errorHandler = require('../middlewares/handleError');
 
 router.use('/user', UserRoute);
 router.use(authentication);
