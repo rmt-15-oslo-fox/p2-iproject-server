@@ -10,11 +10,11 @@ router.post("/register", UserController.registerUser);
 router.post("/login", UserController.loginHandler);
 router.get("/users", UserController.getAllUser);
 router.get("/users/:id", UserController.getUserById);
-router.get("/todos/:id", TodoController.getUserTodos);
 router.use(authentication);
 
+router.get("/todos/complete", TodoController.getUserTodosComplete); //menampilkan halaman yg udh complete
+router.get("/todos/:id", TodoController.getUserTodos);
 router.get("/weather", TodoController.getWeatherForecast);
-router.get("/todos/complete/:id", TodoController.getUserTodosComplete); //menampilkan halaman yg udh complete
 router.post("/todos/:id", TodoController.createTodo);
 router.put("/todos/:id", authorization, TodoController.editUserTodos);
 router.delete("/todos/:id", authorization, TodoController.deleteById);
