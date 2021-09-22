@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       task: DataTypes.STRING,
       description: DataTypes.STRING,
       tag: DataTypes.ARRAY(DataTypes.TEXT),
+      deadline: DataTypes.DATE,
       isComplete: DataTypes.BOOLEAN,
       UserId: DataTypes.INTEGER,
     },

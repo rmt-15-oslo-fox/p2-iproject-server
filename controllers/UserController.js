@@ -72,9 +72,26 @@ class UserController {
 
   static async getAllUser(req, res, next) {
     try {
+      // console.log("sinii");
       const user = await User.findAll({
-        include: [Todo],
+        // include: [Todo],
         order: [["id", "DESC"]],
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      });
+      // console.log(user);
+      res.status(200).json(user);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getUserById(req, res, next) {
+    try {
+      const id = req.params.id;
+      const user = await User.findByPk(id, {
+        include: [Todo],
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },

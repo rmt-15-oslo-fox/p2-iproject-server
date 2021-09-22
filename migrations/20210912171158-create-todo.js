@@ -17,6 +17,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      deadline: {
+        type: Sequelize.DATE,
+      },
       isComplete: {
         type: Sequelize.BOOLEAN,
       },
