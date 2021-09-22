@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Mountain.hasMany(models.Track, {foreignKey: 'MountId'})
+      Mountain.hasMany(models.Trip, {foreignKey: 'MountId'})
     }
   };
   Mountain.init({

@@ -18,12 +18,21 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      TrackId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Tracks',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
       schedule: {
         allowNull: false,
-        type: Sequelize.TIME
+        type: Sequelize.DATEONLY
       },
       status: {
-        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       createdAt: {

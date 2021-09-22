@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     UserId: {
       allowNull: false,
       type: DataTypes.INTEGER
-    },
+    }
   }, {
     sequelize,
     modelName: 'GroupTrip',

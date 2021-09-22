@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, DATE
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Trip extends Model {
@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Trip.hasOne(models.Mountain, {foreignKey: 'MountId'})
+      // Trip.belongsToMany(models.User, {through: 'GroupTrip'})
+      // Trip.belongsTo(models.GroupTrip, {foreignKey: 'TripId'})
+      Trip.belongsTo(models.Mountain, {foreignKey: 'MountId'})
+      Trip.belongsTo(models.Track, {foreignKey: 'TrackId'})
+      Trip.belongsToMany(models.User, {through: 'GroupTrips'})
     }
   };
   Trip.init({
@@ -19,12 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    TrackId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     schedule: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     status: {
-      allowNull: false,
       type: DataTypes.BOOLEAN
     }
   }, {

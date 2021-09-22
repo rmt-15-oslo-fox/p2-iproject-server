@@ -13,7 +13,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert('Tracks', [
        {
-         name: 'Jalur1',
+         name: 'Semeru Jalur1',
          distance: 10,
          tracking_time: 15,
          location: 'Malang',
@@ -24,7 +24,7 @@ module.exports = {
          updatedAt: new Date()
        },
        {
-        name: 'Jalur2',
+        name: 'Semeru Jalur2',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -35,7 +35,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur3',
+        name: 'Semeru Jalur3',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -46,7 +46,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur1',
+        name: 'Rinjani Jalur1',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -57,7 +57,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur2',
+        name: 'Rinjani Jalur2',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -68,7 +68,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur3',
+        name: 'Rinjani Jalur3',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -79,7 +79,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur1',
+        name: 'Kerinci Jalur1',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -90,7 +90,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Jalur2',
+        name: 'Kerinci Jalur2',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',

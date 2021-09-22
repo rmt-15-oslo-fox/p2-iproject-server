@@ -1,11 +1,19 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('EquipmentTrips', {
+    await queryInterface.createTable('Equipment', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      jumlah: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       TripId: {
@@ -13,30 +21,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Trips',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      EquipmentId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Equipment',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      status: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
-      UserId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -53,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('EquipmentTrips');
+    await queryInterface.dropTable('Equipment');
   }
 };
