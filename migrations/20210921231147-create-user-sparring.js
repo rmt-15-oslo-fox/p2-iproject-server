@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      SparingId: {
+      SparringId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Sparrings',
