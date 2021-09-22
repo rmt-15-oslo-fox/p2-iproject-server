@@ -47,6 +47,7 @@ class UserController {
       password,
       email,
       name,
+      balance: 0,
     };
     try {
       const user = await User.create(newUser);
@@ -54,14 +55,11 @@ class UserController {
         res.status(201).json({
           code: 201,
           message: "Success create account",
-          data: {
-            user: {
-              id: user.id,
-              username: user.username,
-              email: user.email,
-              name: user.name,
-            },
-          },
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          balance: user.balance,
         });
       }
     } catch (err) {

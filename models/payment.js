@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const valiDate = require("../helpers/valiDate");
 module.exports = (sequelize, DataTypes) => {
   class Payment extends Model {
     /**
@@ -46,15 +47,27 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      paid: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT PAID AMOUNT",
+          },
+          notNull: {
+            msg: "PLEASE INSERT PAID AMOUNT",
+          },
+        },
+      },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
-            msg: "PLEASE INSERT AMOUNT",
+            msg: "PLEASE INSERT DESCRIPTION",
           },
           notNull: {
-            msg: "PLEASE INSERT AMOUNT",
+            msg: "PLEASE INSERT DESCRIPTION",
           },
         },
       },
@@ -63,10 +76,26 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notEmpty: {
-            msg: "PLEASE INSERT AMOUNT",
+            msg: "PLEASE CHOOSE DEADLINE",
           },
           notNull: {
-            msg: "PLEASE INSERT AMOUNT",
+            msg: "PLEASE CHOOSE DEADLINE",
+          },
+          isAfter: {
+            args: valiDate(new Date()),
+            msg: "DEADLINE CANNOT BE BEFORE TODAY",
+          },
+        },
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "PLEASE INSERT DESCRIPTION",
+          },
+          notNull: {
+            msg: "PLEASE INSERT DESCRIPTION",
           },
         },
       },

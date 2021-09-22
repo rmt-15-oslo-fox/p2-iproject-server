@@ -16,7 +16,7 @@ function date(value) {
   let month = months[value.getMonth()];
   let date = value.getDate();
   let convertedDate = "";
-  if (date > 10 || date < 20) {
+  if (date > 10 && date < 20) {
     convertedDate = `${date}th`;
   } else if (date % 10 === 1) {
     convertedDate = `${date}st`;
@@ -27,7 +27,7 @@ function date(value) {
   } else {
     convertedDate = `${date}th`;
   }
-  return `${convertedDate} - ${month} - ${value.getFullYear()}`;
+  return `${convertedDate} ${month} ${value.getFullYear()}`;
 }
 
 module.exports = date;

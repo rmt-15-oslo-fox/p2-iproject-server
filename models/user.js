@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       balance: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         validate: {
           min: 0,
         },
