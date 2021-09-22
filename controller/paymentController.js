@@ -1,8 +1,7 @@
 const convertCurrency = require("../helpers/convertCurrency");
 const date = require("../helpers/date");
-const convertCurrency = require("../helpers/convertCurrency");
+const convert = require("../helpers/convertCurrency");
 const { User, Payment } = require("../models");
-const { JSONB } = require("sequelize/types");
 
 class PaymentController {
   static async reminderList(req, res, next) {
@@ -149,7 +148,7 @@ class PaymentController {
 
   static async convertCurrency(req, res, next) {
     try {
-      const converted = await convertCurrency(
+      const converted = await convert(
         req.body.amount,
         req.body.currencyFrom,
         req.body.currencyTo,
