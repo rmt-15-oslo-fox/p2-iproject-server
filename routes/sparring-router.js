@@ -10,5 +10,6 @@ router.get("/", SparringController.findAll)
 router.get("/:id", SparringController.findById)
 router.use(authentication)
 router.post("/", uploadImage, imageKit, SparringController.create)
+router.post("/:id", uploadImage, imageKit, SparringController.update)
 
 module.exports = router
