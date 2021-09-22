@@ -6,11 +6,11 @@ const UserController = require("../controllers/userController");
 const userRouter = Router();
 
 userRouter.use(authenticationUser);
-userRouter.patch(
+userRouter.put(
   "/:id",
   fileUpload.single("avatar"),
   uploadUserAvatar,
-  UserController.changeAvatarHandler
+  UserController.updateProfileHandler
 );
 userRouter.get("/profile", UserController.getUserProfile);
 
