@@ -102,46 +102,6 @@ class TodoController {
     }
   }
 
-  static async editUserTodos(req, res, next) {
-    const id = +req.params.id;
-    const { task, description, deadline } = req.body;
-    const tag = req.body.tag.split(", ");
-    try {
-      const findTodos = await Todo.findByPk(id);
-
-      if (!findTodos) {
-        throw {
-          name: "NOTFOUND",
-          msg: `Task with id ${id} not found`,
-        };
-      }
-
-      const updatedTodo = await Todo.update(
-        {
-          task: task,
-          description: description,
-          tag: tag,
-          deadline: deadline,
-        },
-        {
-          where: {
-            id: findTodos.id,
-          },
-          returning: true,
-        }
-      );
-
-      let result = updatedTodo[1][0];
-
-      res.status(200).json({
-        message: `Task with id ${result.id} updated successfully`,
-        result,
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
-
   static async deleteById(req, res, next) {
     const id = +req.params.id;
     try {

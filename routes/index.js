@@ -16,7 +16,6 @@ router.get("/todos/complete", TodoController.getUserTodosComplete); //menampilka
 router.get("/todos/:id", TodoController.getUserTodos);
 router.get("/weather", TodoController.getWeatherForecast);
 router.post("/todos/:id", TodoController.createTodo);
-router.put("/todos/:id", authorization, TodoController.editUserTodos);
 router.delete("/todos/:id", authorization, TodoController.deleteById);
 router.patch("/todos/:id", authorization, TodoController.completedTodo);
 
