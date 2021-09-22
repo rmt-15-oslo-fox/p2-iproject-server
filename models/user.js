@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { encode } = require("../helpers/bcrypt")
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Sparring, { foreignKey: "AuthorId" })
-      User.hasOne(models.UserSparrings, { foreignKey: "UserId" })
+      User.hasOne(models.UserSparring, { foreignKey: "UserId" })
     }
   };
   User.init({
@@ -37,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      isEmail: true,
       validate: {
         notNull: {
           args: true,
@@ -46,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "Invalid email format"
         },
-      },
-      isEmail: {
-        args: true,
-        msg: "Invalid email format"
+        isEmail: {
+          args: true,
+          msg: "Invalid email format"
+        },
       },
       unique: {
         args: true,
@@ -71,6 +73,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    hooks: {
+      beforeCreate(user) {
+        user.password = encode(user.password)
+      }
+    },
     sequelize,
     modelName: 'User',
   });

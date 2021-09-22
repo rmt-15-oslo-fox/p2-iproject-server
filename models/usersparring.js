@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      UserSparring.belongsTo(models.Sparrings, { foreignKey: "SparringId" })
-      UserSparring.belongsTo(models.Users, { foreignKey: "UserId" })
+      UserSparring.belongsTo(models.Sparring, { foreignKey: "SparringId" })
+      UserSparring.belongsTo(models.User, { foreignKey: "UserId" })
     }
   };
   UserSparring.init({

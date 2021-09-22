@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Sparring.belongsTo(models.Category, { foreignKey: "CategoryId" })
       Sparring.belongsTo(models.User, { foreignKey: "AuthorId" })
-      Sparring.hasOne(models.UserSparrings, { foreignKey: "SparringId" })
+      Sparring.hasOne(models.UserSparring, { foreignKey: "SparringId" })
     }
   };
   Sparring.init({
