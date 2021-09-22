@@ -213,10 +213,11 @@ class Controller {
         where: {
           TripId
         },
+        // include: ['EquipmentUsers'],
         include: {
-          model: User,
+          model: EquipmentUser,
           include: {
-            model: EquipmentUser
+            model: User
           }
         },
         attributes: {
