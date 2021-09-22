@@ -59,7 +59,7 @@ class TodoController {
   }
 
   static async getUserTodosComplete(req, res, next) {
-    const id = +req.params.id;
+    const id = +req.user.id;
     try {
       const todos = await Todo.findAll({
         where: {
