@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      isEmail: true,
       validate: {
         notNull: {
           args: true,
@@ -47,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "Invalid email format"
         },
-      },
-      isEmail: {
-        args: true,
-        msg: "Invalid email format"
+        isEmail: {
+          args: true,
+          msg: "Invalid email format"
+        },
       },
       unique: {
         args: true,
