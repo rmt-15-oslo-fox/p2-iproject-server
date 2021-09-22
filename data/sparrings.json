@@ -7,7 +7,7 @@
     "location": "Lapangan banteng, Jakpus",
     "status": "Active",
     "CategoryId": 2,
-    "AuthorId": 8
+    "AuthorId": 3
   },
   {
     "teamName": "Barcelona",
@@ -17,7 +17,7 @@
     "location": "Lapangan banteng, Jakpus",
     "status": "Active",
     "CategoryId": 1,
-    "AuthorId": 4
+    "AuthorId": 2
   },
   {
     "teamName": "PSG",
