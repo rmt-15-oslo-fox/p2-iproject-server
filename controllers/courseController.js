@@ -170,10 +170,13 @@ class CourseController {
 
       for (let i = 0; i < instructors.length; i++) {
         const element = instructors[i];
-        await User.increment("balance", {
-          by: element.price,
-          where: { id: element.instructor_id },
+        const user = await User.findOne({
+          where: {
+            id: element.instructor_id,
+          },
         });
+        user.balance += element.price;
+        await user.save();
       }
       res.status(200);
     } catch (err) {
