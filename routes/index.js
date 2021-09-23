@@ -15,6 +15,7 @@ router.get('/composites', FetchController.fetchCompositeIndex)
 router.get('/stocks', FetchController.fetchStockChart)
 router.get('/search', FetchController.searchStock)
 router.get('/bulksearch', FetchController.bulkSearchStock)
+router.get('/news', FetchController.fetchNews)
 
 router.get('/forums', ForumController.showForumByStockName)
 router.post('/forums', ForumController.addComment)
