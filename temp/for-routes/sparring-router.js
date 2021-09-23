@@ -1,8 +1,8 @@
 const router = require("express").Router()
 
-const authentication = require("../middlewares/authentication")
-const uploadImage = require("../middlewares/multer")
-const imageKit = require("../middlewares/imageKit")
+const authentication = require("../../middlewares/authentication")
+const uploadImage = require("../../middlewares/multer")
+const imageKit = require("../../middlewares/imageKit")
 
 const SparringController = require("../controllers/sparring-controller")
 

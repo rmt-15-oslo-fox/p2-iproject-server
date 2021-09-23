@@ -1,4 +1,4 @@
-const { Sparring, User, Category } = require("../models")
+const { Sparring, User, Category } = require("../../models")
 
 class SparringController {
   static async findAll(req, res, next) {

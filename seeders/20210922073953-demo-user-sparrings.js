@@ -13,13 +13,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    const data = JSON.parse(fs.readFileSync("./data/sparrings.json", "utf-8"))
+    const data = JSON.parse(fs.readFileSync("./data/user-sparrings.json", "utf-8"))
     data.forEach(element => {
       element.createdAt = new Date()
       element.updatedAt = new Date()
     });
 
-    await queryInterface.bulkInsert("Sparrings", data, {})
+    await queryInterface.bulkInsert("UserSparrings", data, {})
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -29,6 +29,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Sparrings", null, {})
+    await queryInterface.bulkDelete("UserSparrings", null, {})
   }
 };

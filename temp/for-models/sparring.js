@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserSparring extends Model {
+  class Sparring extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      UserSparring.belongsTo(models.Category, { foreignKey: "CategoryId" })
-      UserSparring.belongsTo(models.User, { foreignKey: "AuthorId" })
-      UserSparring.hasOne(models.Sparring, { foreignKey: "UserSparringId" })
+      Sparring.belongsTo(models.Category, { foreignKey: "CategoryId" })
+      Sparring.belongsTo(models.User, { foreignKey: "AuthorId" })
+      Sparring.hasOne(models.UserSparring, { foreignKey: "SparringId" })
     }
   };
-  UserSparring.init({
+  Sparring.init({
     teamName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,20 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       }
     },
-    teamLogo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Team logo cannot be null"
-        },
-        notEmpty: {
-          args: true,
-          msg: "Team logo is required"
-        },
-      }
-    },
+    teamLogo: DataTypes.STRING,
     description: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -131,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'UserSparring',
+    modelName: 'Sparring',
   });
-  return UserSparring;
+  return Sparring;
 };
