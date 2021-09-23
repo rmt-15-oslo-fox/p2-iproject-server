@@ -1,0 +1,1 @@
+GET https://data.covid19.go.id/public/api/update.json HTTP/1.1

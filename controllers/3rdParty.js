@@ -3,11 +3,11 @@ const axios = require('axios')
 class apiController {
     static async getDataCovidIndo(req, res, next) {
         axios({
-            url: 'https://api.kawalcorona.com/indonesia/',
+            url: 'https://data.covid19.go.id/public/api/update.json',
             method: 'get'
         })
             .then(resp => {
-                res.status(200).json(resp.data)
+                res.status(200).json(resp.data.update.penambahan)
             })
             .catch(err => {
                 console.log(err)
