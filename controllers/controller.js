@@ -10,6 +10,11 @@ const rapidHeaders = {
     'x-rapidapi-key': '7035591cf1msh9e1b17adb1471cbp1992abjsn8700c16fa59a'
   }
 
+const covidHeaders = {
+    'x-rapidapi-host': 'covid-19-data.p.rapidapi.com',
+    'x-rapidapi-key': '7035591cf1msh9e1b17adb1471cbp1992abjsn8700c16fa59a'
+}
+
 class Controller{
     static register(req, res){
         const {email, password} = req.body
@@ -58,7 +63,7 @@ class Controller{
 
     static getPlaces(req, res){
         const page = +req.query.page || 1
-        const limit = +req.query.size || 8
+        const limit = +req.query.size || 6
         const query = req.query.search || 'jakarta'
         
         let offset = (page - 1) * limit
@@ -71,7 +76,8 @@ class Controller{
                 query,
                 limit,
                 offset,
-                units: 'km'
+                units: 'km',
+                lang: 'en-US'
             }
         })
         .then(response =>{
@@ -85,7 +91,7 @@ class Controller{
 
     static getRestaurant(req, res){
         const page = +req.query.page || 1
-        const limit = +req.query.size || 8
+        const limit = +req.query.size || 6
         const location_id = +req.query.location_id || 294229
         
         let offset = (page - 1) * limit
@@ -112,7 +118,7 @@ class Controller{
 
     static getHotels(req, res){
         const page = +req.query.page || 1
-        const limit = +req.query.size || 8
+        const limit = +req.query.size || 6
         const location_id = +req.query.location_id || 294229
         const adults = +req.query.adults || 1
         const rooms = +req.query.rooms || 1
@@ -144,7 +150,7 @@ class Controller{
 
     static getAttractions(req, res){
         const page = +req.query.page || 1
-        const limit = +req.query.size || 8
+        const limit = +req.query.size || 6
         const location_id = +req.query.location_id || 294229
         
         let offset = (page - 1) * limit
@@ -197,6 +203,25 @@ class Controller{
         })
     }
 
+    static covidData(req, res){
+        const name = req.query.country
+        axios({
+            method: "get",
+            url: `https://covid-19-data.p.rapidapi.com/country`,
+            headers: covidHeaders,
+            params: {
+                name
+            }
+        })
+        .then(response =>{
+            let result = response.data[0]
+            res.status(200).json(result)
+        })
+        .catch(err =>{
+            res.status(500).json({message: 'Internal Server Error'})
+        })
+
+    }
 }
 
 module.exports = Controller

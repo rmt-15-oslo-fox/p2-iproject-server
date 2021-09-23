@@ -9,6 +9,7 @@ router.get('/places', Controller.getPlaces)
 router.get('/restaurants', Controller.getRestaurant)
 router.get('/hotels', Controller.getHotels)
 router.get('/attractions', Controller.getAttractions)
+router.get('/covid', Controller.covidData)
 
 router.use(authN)
 
