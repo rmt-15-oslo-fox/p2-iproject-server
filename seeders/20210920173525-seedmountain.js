@@ -38,7 +38,16 @@ module.exports = {
        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f4/Uprising-mount_kerinci.jpg',
        createdAt: new Date(),
        updatedAt: new Date()
-     }
+     },
+     {
+      name: 'Gede',
+      height: '2958',
+      status: true,
+      lokasi: 'Bogor, Jawa Barat',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Mount_Gede_00.jpg/1920px-Mount_Gede_00.jpg',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
      ])
   },
 

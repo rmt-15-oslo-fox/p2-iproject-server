@@ -13,7 +13,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert('Tracks', [
        {
-         name: 'Semeru Jalur1',
+         name: 'Ranu Pani',
          distance: 10,
          tracking_time: 15,
          location: 'Malang',
@@ -24,7 +24,7 @@ module.exports = {
          updatedAt: new Date()
        },
        {
-        name: 'Semeru Jalur2',
+        name: 'Landengan Dowo',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -35,7 +35,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Semeru Jalur3',
+        name: 'Watu Rejeng',
         distance: 10,
         tracking_time: 15,
         location: 'Malang',
@@ -46,10 +46,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Rinjani Jalur1',
+        name: 'Sembalun',
         distance: 10,
         tracking_time: 15,
-        location: 'Malang',
+        location: 'Lombok',
         transport: 'Naik bis dari stasiun a ke b',
         jumlahPos: 10,
         MountId: 2,
@@ -57,10 +57,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Rinjani Jalur2',
+        name: 'Timbanuh',
         distance: 10,
         tracking_time: 15,
-        location: 'Malang',
+        location: 'Lombok',
         transport: 'Naik bis dari stasiun a ke b',
         jumlahPos: 10,
         MountId: 2,
@@ -68,10 +68,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Rinjani Jalur3',
+        name: 'Senaru',
         distance: 10,
         tracking_time: 15,
-        location: 'Malang',
+        location: 'Lombok',
         transport: 'Naik bis dari stasiun a ke b',
         jumlahPos: 10,
         MountId: 2,
@@ -79,10 +79,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Kerinci Jalur1',
+        name: 'Kersik Tuo',
         distance: 10,
         tracking_time: 15,
-        location: 'Malang',
+        location: 'Jambi',
         transport: 'Naik bis dari stasiun a ke b',
         jumlahPos: 10,
         MountId: 3,
@@ -90,13 +90,46 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Kerinci Jalur2',
+        name: 'Solok Selatan',
         distance: 10,
         tracking_time: 15,
-        location: 'Malang',
+        location: 'Solok',
         transport: 'Naik bis dari stasiun a ke b',
         jumlahPos: 10,
         MountId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Cibodas',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Gunung Putri',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Salabintana',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
         createdAt: new Date(),
         updatedAt: new Date()
       }

@@ -56,15 +56,17 @@ class Controller {
 
   static async addTrip(req, res, next) {
     try {
-      let { MountId, TrackId, schedule } = req.body
-      if (schedule == null) {
+      let { MountId, TrackId, start_date, end_date } = req.body
+      if (start_date == null || end_date == null) {
         throw { name: 'schedulenull' }
       }
-      schedule = new Date(schedule)
+      start_date = new Date(start_date)
+      end_date = new Date(end_date)
       const tripCreated = await Trip.create({
         MountId,
         TrackId,
-        schedule
+        start_date,
+        end_date
       })
       const userTrip = await GroupTrip.create({
         TripId: tripCreated.id,
@@ -120,12 +122,25 @@ class Controller {
     try {
       const { TripId } = req.params
       const UserId = req.userLogin.id
-      await GroupTrip.destroy({
+      const isHasMember = await GroupTrip.findAll({
         where: {
-          TripId,
-          UserId
+          TripId
         }
       })
+      if(isHasMember.length == 1){
+        await Trip.destroy({
+          where: {
+            id: TripId
+          }
+        })
+      } else {
+        await GroupTrip.destroy({
+          where: {
+            TripId,
+            UserId
+          }
+        })
+      }
       res.status(200).json({ message: 'Trip was deleted' })
     } catch (err) {
       next(err)
@@ -258,6 +273,52 @@ class Controller {
         })
       }
       res.status(201).json({message: 'success'})
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async deleteEquipmentUser(req, res, next){
+    try {
+      const {EquipmentId, UserId} = req.query
+      const isExist = await EquipmentUser.findOne({
+        where: {
+          EquipmentId,
+          UserId
+        }
+      })
+      if(isExist.jumlah > 1){
+        await EquipmentUser.update({
+          jumlah: +(isExist.jumlah) - 1
+        }, {
+          where: {
+            EquipmentId,
+            UserId
+          }
+        })
+      } else {
+        await EquipmentUser.destroy({
+          where: {
+            EquipmentId,
+            UserId
+          }
+        })
+      }
+      res.status(201).json({message: 'success'})
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async deleteEquipment(req, res, next){
+    try {
+      const { EquipmentId } = req.query
+      await Equipment.destroy({
+        where: {
+          id: EquipmentId
+        }
+      })
+      res.status(200).json({message: 'success deleted'})
     } catch (err) {
       next(err)
     }

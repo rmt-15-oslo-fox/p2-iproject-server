@@ -27,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
-    schedule: {
+    start_date: {
+      allowNull: false,
+      type: DataTypes.DATEONLY
+    },
+    end_date: {
       allowNull: false,
       type: DataTypes.DATEONLY
     },

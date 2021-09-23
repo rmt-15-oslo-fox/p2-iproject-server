@@ -17,6 +17,8 @@ router.get('/weather', Controller.getWeather)
 router.post('/equipment', Controller.postEquipment)
 router.get('/equipment/:tripid', Controller.getEquipmentById)
 router.post('/equipmentuser', Controller.postPJEquipment)
+router.delete('/equipmentuser', Controller.deleteEquipmentUser)
+router.delete('/equipment', Controller.deleteEquipment)
 
 router.use(errorHandler)
 
