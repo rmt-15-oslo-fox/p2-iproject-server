@@ -12,5 +12,6 @@ router.post("/balance", paymentController.addBalance);
 router.put("/:id", authorizePay, paymentController.pay);
 router.post("/convert", paymentController.convertCurrency);
 router.delete("/:id", authorizationDelete, paymentController.deletePayment);
+router.get("/:id", paymentController.getReminderById);
 
 module.exports = router;

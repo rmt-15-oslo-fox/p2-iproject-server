@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Payment.belongsTo(models.User, {
         foreignKey: "userId",
+        as: "payer",
       });
       Payment.belongsTo(models.User, {
         foreignKey: "receiverId",
+        as: "receiver",
       });
     }
   }

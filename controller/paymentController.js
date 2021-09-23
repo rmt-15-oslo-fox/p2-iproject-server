@@ -1,4 +1,5 @@
 const convertCurrency = require("../helpers/convertCurrency");
+const sendNodemailer = require("../helpers/nodemailer");
 const date = require("../helpers/date");
 const convert = require("../helpers/convertCurrency");
 const { User, Payment } = require("../models");
@@ -22,6 +23,7 @@ class PaymentController {
         include: {
           model: User,
           attributes: ["name"],
+          as: "receiver",
         },
       });
       res.status(200).json({
@@ -35,16 +37,17 @@ class PaymentController {
 
   static async paymentStatus(req, res, next) {
     try {
-      const reminder = await Payment.findAll({
+      const status = await Payment.findAll({
         where: { receiverId: req.login.id },
         include: {
           model: User,
           attributes: ["name"],
+          as: "payer",
         },
       });
       res.status(200).json({
         message: "Succeded in getting all payment status",
-        reminder,
+        status,
       });
     } catch (err) {
       next(err);
@@ -53,6 +56,7 @@ class PaymentController {
 
   static async pay(req, res, next) {
     try {
+      console.log(req.body.amount);
       const payment = await Payment.findByPk(req.params.id);
       const user = await User.findByPk(req.login.id);
       if (!payment) {
@@ -103,6 +107,11 @@ class PaymentController {
             returning: true,
           }
         );
+        sendNodemailer(
+          req.login.email,
+          "Payment success",
+          `Payment to ${receiver.name} was done!`
+        );
         res.status(200).json({ message: "Payment success" });
       } else if (payment.amount > req.body.amount) {
         const user = await User.findByPk(req.login.id);
@@ -132,6 +141,11 @@ class PaymentController {
             where: { id: req.params.id },
             returning: true,
           }
+        );
+        sendNodemailer(
+          req.login.email,
+          "Payment success",
+          `Payment to ${receiver.name} was done!`
         );
         res.status(200).json({
           message: `Payment success, remaining amount: ${remainingAmount}`,

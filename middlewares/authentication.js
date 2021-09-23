@@ -14,6 +14,7 @@ const authentication = async (req, res, next) => {
     req.login = {
       id: user.id,
       username: user.username,
+      email: user.email,
     };
     next();
   } catch (error) {

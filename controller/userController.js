@@ -1,5 +1,6 @@
 const { pwdValidation } = require("../helpers/bcryptjs");
 const { generateToken } = require("../helpers/jwt");
+const sendNodemailer = require("../helpers/nodemailer");
 const { User } = require("../models");
 const { OAuth2Client } = require("google-auth-library");
 class UserController {
@@ -52,6 +53,11 @@ class UserController {
     try {
       const user = await User.create(newUser);
       if (user) {
+        sendNodemailer(
+          email,
+          "Registration success",
+          "Congratulations, you have successfully registered on Remempay!"
+        );
         res.status(201).json({
           code: 201,
           message: "Success create account",
