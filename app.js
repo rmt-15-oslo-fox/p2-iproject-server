@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT;
 const cors = require("cors");
 const router = require("./routes/index");
 const httpServer = require("http").createServer(app);
@@ -15,7 +15,6 @@ const users = [];
 
 io.on("connection", (socket) => {
   console.log(`user connected`);
-  socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("sendMessage", (data) => {
     // console.log(data);
