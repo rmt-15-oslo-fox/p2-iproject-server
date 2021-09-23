@@ -1,4 +1,4 @@
-const { User, Todo } = require("../models");
+const { User, Todo, Community } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { signPayload } = require("../helpers/jwt");
 
@@ -98,6 +98,39 @@ class UserController {
       });
       res.status(200).json(user);
     } catch (err) {
+      next(err);
+    }
+  }
+
+  static async community(req, res, next) {
+    try {
+      const { username, name } = req.body;
+      const createCom = await Community.create({
+        username,
+        name,
+      });
+
+      res.status(201).json({
+        id: createCom.id,
+        username: createCom.username,
+        name: createCom.name,
+      });
+    } catch (err) {
+      // console.log(err);
+      next(err);
+    }
+  }
+
+  static async getAllUserCommunity(req, res, next) {
+    try {
+      const { name } = req.query;
+      const allCom = await Community.findAll({
+        where: { name },
+      });
+
+      res.status(201).json(allCom);
+    } catch (err) {
+      // console.log(err);
       next(err);
     }
   }
