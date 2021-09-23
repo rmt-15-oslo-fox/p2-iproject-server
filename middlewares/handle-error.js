@@ -16,10 +16,21 @@ function errorHandle(err, req, res, next) {
       code = 401
       message = err.message
       break;
-    case "NotFoundSparringError":
+    case "NotFoundUserSparringError":
       code = 404
       message = err.message
       break;
+    case "NotFoundAuthorizationError":
+      code = 404
+      message = err.message
+      break;
+    case "JsonWebTokenError":
+      code = 401
+      message = err.message
+      break;
+    case "ForbiddenError":
+      code = 403
+      message = err.message
     default:
       break;
   }
