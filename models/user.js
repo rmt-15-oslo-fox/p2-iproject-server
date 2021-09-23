@@ -63,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       avatar_url: DataTypes.STRING,
+      balance: DataTypes.INTEGER,
     },
     {
       sequelize,
