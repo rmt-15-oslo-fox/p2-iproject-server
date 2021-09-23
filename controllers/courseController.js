@@ -168,12 +168,13 @@ class CourseController {
         };
       });
 
-      instructors.forEach((element) => {
+      for (let i = 0; i < instructors.length; i++) {
+        const element = instructors[i];
         await User.increment("balance", {
           by: element.price,
           where: { id: element.instructor_id },
         });
-      });
+      }
       res.status(200);
     } catch (err) {
       next(err);
