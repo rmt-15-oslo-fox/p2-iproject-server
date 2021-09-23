@@ -26,6 +26,7 @@
     "p2-iproject-server": "www.js"
   },
   "scripts": {
+    "dev": "NODE_ENV=development npx nodemon app.js",
     "start": "node bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
