@@ -1,7 +1,12 @@
-POST  http://localhost:3000/register HTTP/1.1
+POST  https://covid-app-server-21.herokuapp.com/login HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 username=izon
 &email=wppq.yt@gmail.com
 &password=izon
 &city=Palu
+
+###
+GET https://covid-app-server-21.herokuapp.com/hospital/location HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Authorization: access_token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iml6b24iLCJpZCI6MSwiaWF0IjoxNjMyMzcwMTc0fQ.l9ShxBz3RtzTDryHI77KTxud-G92USUUzBfa_y7Hp74

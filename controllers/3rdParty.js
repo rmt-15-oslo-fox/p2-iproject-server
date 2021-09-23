@@ -10,7 +10,10 @@ class apiController {
                 res.status(200).json(resp.data.update.penambahan)
             })
             .catch(err => {
-                console.log(err)
+                next({
+                    statusCode : 500,
+                    name : 'INternalServerError'
+                })
             })
     }
 
@@ -23,7 +26,10 @@ class apiController {
                 res.status(200).json(resp.data)
             })
             .catch(err => {
-                console.log(err)
+                next({
+                    statusCode : 500,
+                    name : 'INternalServerError'
+                })
             })
     }
 
@@ -49,12 +55,18 @@ class apiController {
                     res.status(200).json(dataResult)
                 })
                 .catch(err => {
-                    console.log(err)
+                    next({
+                        statusCode : 500,
+                        name : 'INternalServerError'
+                    })
                 })
                 
             })
             .catch(err => {
-                console.log(err)
+                next({
+                    statusCode : 500,
+                    name : 'INternalServerError'
+                })
             })
     }
 }
