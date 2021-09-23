@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User } = require('../models/')
 const { decode } = require('../helpers/bcrypt')
 const { sign } = require('../helpers/jwt')
 

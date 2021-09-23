@@ -54,11 +54,15 @@ const data = {
 }
 
 let a = 'ASII.JK'
-let timeSt = data[a].timestamp[19]
+let timeSt = data[a].timestamp[3]
 
 // timeSt.forEach(element => {
 //   element = new Date(element*1000)
 // });
 
 let newDate = new Date(timeSt * 1000)
-console.log(newDate);
+let formattedDate = newDate.getDate() + '/' + newDate.getMonth()
+
+let formattedTime = newDate.getHours() 
+
+console.log(formattedTime)
