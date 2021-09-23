@@ -88,10 +88,10 @@ class Controller {
   static async getAllUserCourses(req, res, next) {
     const { id: UserId } = req.user_login;
     try {
-      const usercourses = UserCourse.findAll({
+      const usercourses = await UserCourse.findAll({
         where: {
           status: "active",
-          UserId: UserId,
+          UserId: +UserId,
         },
         include: [Course],
       });
