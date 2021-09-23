@@ -1,5 +1,5 @@
 const TodoController = require("../controllers/TodoController");
-const UserController = require("../Controllers/UserController");
+const UserController = require("../controllers/UserController");
 const { errorHandler } = require("../errorHandlers/errorHandler");
 const { authentication } = require("../middlewares/authentication");
 const { authorization } = require("../middlewares/authorization");
