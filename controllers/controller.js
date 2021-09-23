@@ -51,7 +51,7 @@ class Controller{
                     id:data.id,
                     email:data.email
                 })
-                res.status(200).json({id:data.id,email:data.email,access_token})
+                res.status(200).json({email:data.email,access_token})
             }else{
                 res.status(401).json({message: 'Invalid Email/Password'})
             }
