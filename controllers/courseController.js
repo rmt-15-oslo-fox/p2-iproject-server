@@ -105,6 +105,9 @@ class CourseController {
           secure: true,
         },
         items_detail: items_detail,
+        callbacks: {
+          finish: "https://favcourse-pro.web.app/",
+        },
         customer_details: {
           first_name: req.user_login.name,
           email: req.user_login.email,
