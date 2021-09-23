@@ -7,6 +7,10 @@ const router = require("./routes/index");
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer);
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
+
 const users = [];
 
 io.on("connection", (socket) => {
@@ -28,10 +32,6 @@ io.on("connection", (socket) => {
     io.emit("sendUser", users);
   });
 });
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(cors());
 
 app.use(router);
 
