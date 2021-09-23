@@ -13,14 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Community.init(
     {
-      username: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: {
-            msg: "username required",
-          },
-        },
-      },
       name: {
         type: DataTypes.STRING,
         validate: {

@@ -1,5 +1,5 @@
 const TodoController = require("../controllers/TodoController");
-const UserController = require("../Controllers/UserController");
+const UserController = require("../controllers/UserController");
 const { errorHandler } = require("../errorHandlers/errorHandler");
 const { authentication } = require("../middlewares/authentication");
 const { authorization } = require("../middlewares/authorization");
@@ -18,8 +18,8 @@ router.get("/weather", TodoController.getWeatherForecast);
 router.post("/todos/:id", TodoController.createTodo);
 router.delete("/todos/:id", authorization, TodoController.deleteById);
 router.patch("/todos/:id", authorization, TodoController.completedTodo);
-router.post("/community", UserController.community);
-router.get("/community", UserController.getAllUserCommunity);
+// router.post("/community", UserController.community);
+router.get("/community", UserController.getAllCommunity);
 
 router.use(errorHandler);
 module.exports = router;

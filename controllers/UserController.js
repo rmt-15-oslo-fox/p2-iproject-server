@@ -102,31 +102,9 @@ class UserController {
     }
   }
 
-  static async community(req, res, next) {
+  static async getAllCommunity(req, res, next) {
     try {
-      const { username, name } = req.body;
-      const createCom = await Community.create({
-        username,
-        name,
-      });
-
-      res.status(201).json({
-        id: createCom.id,
-        username: createCom.username,
-        name: createCom.name,
-      });
-    } catch (err) {
-      // console.log(err);
-      next(err);
-    }
-  }
-
-  static async getAllUserCommunity(req, res, next) {
-    try {
-      const { name } = req.query;
-      const allCom = await Community.findAll({
-        where: { name },
-      });
+      const allCom = await Community.findAll();
 
       res.status(201).json(allCom);
     } catch (err) {
