@@ -1,11 +1,11 @@
-const { Sparring, User, Category } = require("../models")
+const { UserSparring, User, Category } = require("../models")
 
-class SparringController {
+class UserSparringController {
   static async findAll(req, res, next) {
     try {
-      const sparrings = await Sparring.findAll({
+      const userSparrings = await UserSparring.findAll({
         where: {
-          status: "Active"
+          AuthorId: req.user.id
         },
         order: [
           ["createdAt", "DESC"]
@@ -18,7 +18,7 @@ class SparringController {
           attributes: ["id", "name"]
         }]
       })
-      res.status(200).json(sparrings)
+      res.status(200).json(userSparrings)
     } catch (error) {
       next(error)
     }
@@ -27,14 +27,14 @@ class SparringController {
   static async findById(req, res, next) {
     const id = req.params.id
     try {
-      const findSparringById = await Sparring.findByPk(id)
+      const userSparringById = await UserSparring.findByPk(id)
 
-      if (findSparringById) {
-        res.status(200).json(findSparringById)
+      if (userSparringById) {
+        res.status(200).json(userSparringById)
       } else {
         throw {
-          name: "NotFoundSparringError",
-          message: `Sparring with id ${id} not found`
+          name: "NotFoundUserSparringError",
+          message: `User sparring with id ${id} not found`
         }
       }
     } catch (error) {
@@ -56,8 +56,8 @@ class SparringController {
     }
 
     try {
-      const newSparring = await Sparring.create(data)
-      res.status(201).json(newSparring)
+      const newUserSparring = await UserSparring.create(data)
+      res.status(201).json(newUserSparring)
     } catch (error) {
       next(error)
     }
@@ -74,22 +74,23 @@ class SparringController {
       location: temp.location,
       CategoryId: temp.CategoryId,
     }
+    console.log(data);
 
     try {
-      const sparringById = await Sparring.findByPk(id)
+      const userSparringById = await UserSparring.findByPk(id)
 
-      if (sparringById) {
-        const editedSparring = await Sparring.update(data, {
+      if (userSparringById) {
+        const editedUserSparring = await UserSparring.update(data, {
           where: {
             id
           },
           returning: true,
         })
-        res.status(200).json(editedSparring[1][0])
+        res.status(200).json(editedUserSparring[1][0])
       } else {
         throw {
-          name: "NotFoundSparringError",
-          message: `Sparring with id ${id} not found`
+          name: "NotFoundUserSparringError",
+          message: `User sparring with id ${id} not found`
         }
       }
     } catch (err) {
@@ -98,4 +99,4 @@ class SparringController {
   }
 }
 
-module.exports = SparringController
+module.exports = UserSparringController

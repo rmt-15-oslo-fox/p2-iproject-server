@@ -8,16 +8,40 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      SparringId: {
+      teamName: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      teamLogo: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      description: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      schedule: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      location: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      status: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      CategoryId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Sparrings',
+          model: 'Categories',
           key: 'id'
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      UserId: {
+      AuthorId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',

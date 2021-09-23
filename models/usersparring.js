@@ -11,36 +11,121 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      UserSparring.belongsTo(models.Sparring, { foreignKey: "SparringId" })
-      UserSparring.belongsTo(models.User, { foreignKey: "UserId" })
+      UserSparring.belongsTo(models.Category, { foreignKey: "CategoryId" })
+      UserSparring.belongsTo(models.User, { foreignKey: "AuthorId" })
+      UserSparring.hasOne(models.Sparring, { foreignKey: "UserSparringId" })
     }
   };
   UserSparring.init({
-    SparringId: {
-      type: DataTypes.INTEGER,
+    teamName: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
           args: true,
-          msg: "Sparring id cannot be null"
+          msg: "Team name cannot be null"
         },
         notEmpty: {
           args: true,
-          msg: "Sparring id is required"
+          msg: "Team name is required"
         },
       }
     },
-    UserId: {
+    teamLogo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Team logo cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Team logo is required"
+        },
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Description cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Description is required"
+        },
+      }
+    },
+    schedule: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Schedule cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Schedule is required"
+        },
+      }
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Location cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Location is required"
+        },
+      }
+    },
+    status: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
           args: true,
-          msg: "User id cannot be null"
+          msg: "status cannot be null"
         },
         notEmpty: {
           args: true,
-          msg: "User id is required"
+          msg: "status is required"
+        },
+      }
+    },
+    CategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Category cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Category is required"
+        },
+      }
+    },
+    AuthorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Author id cannot be null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Author id is required"
         },
       }
     },
