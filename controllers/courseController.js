@@ -109,9 +109,6 @@ class CourseController {
           first_name: req.user_login.name,
           email: req.user_login.email,
         },
-        callbacks: {
-          finish: "http://localhost:8080/",
-        },
       };
       const results = await createTransaction(parameter);
 
