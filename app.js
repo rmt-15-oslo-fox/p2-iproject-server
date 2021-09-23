@@ -19,7 +19,7 @@ const botWelcome = "HackBot";
 //pas client connect
 io.on("connection", (socket) => {
   socket.on("joinRoom", (payload) => {
-    console.log(payload, "first");
+    // console.log(payload, "first");
 
     const user = joinRoom(socket.id, payload.username, payload.room);
     // console.log(user, "km siapa");
@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (msg) => {
     const user = getCurrentUser(socket.id);
-    console.log(user, "disiniii");
+    // console.log(user, "disiniii");
     // console.log(msg);
     io.to(user.room).emit("message", formatMessage(user.username, msg));
   });
