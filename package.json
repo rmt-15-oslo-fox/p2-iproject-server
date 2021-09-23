@@ -4,6 +4,7 @@
   "description": "Individual Portfolio Server",
   "main": "app.js",
   "scripts": {
+    "start": "node bin/www",
     "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "repository": {
