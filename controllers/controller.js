@@ -93,9 +93,7 @@ class Controller {
           status: "active",
           UserId: UserId,
         },
-        include: {
-          model: Course,
-        },
+        include: [Course],
       });
 
       res.status(200).json({
