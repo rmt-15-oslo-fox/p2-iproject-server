@@ -1,4 +1,6 @@
 const express = require("express");
+const Controller = require("../controllers/controller");
+const authenticationUser = require("../middleware/authenticationUser");
 const errorHandler = require("../middleware/error");
 const authRouter = require("./authRouter");
 const cartRouter = require("./cartRouter");
@@ -13,5 +15,7 @@ router.use("/", authRouter);
 router.use("/", checkoutRouter);
 router.use("/users", userRouter);
 router.use("/carts", cartRouter);
+router.use(authenticationUser);
+router.get("/learnings", Controller.getAllUserCourses);
 router.use(errorHandler);
 module.exports = router;

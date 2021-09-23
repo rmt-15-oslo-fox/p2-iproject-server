@@ -1,4 +1,4 @@
-const { Course, User, Category } = require("../models");
+const { Course, User, Category, UserCourse } = require("../models");
 class Controller {
   static async getAllCourses(req, res, next) {
     try {
@@ -79,6 +79,30 @@ class Controller {
         message: "success get categories",
         status: "success",
         categories: categories,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAllUserCourses(req, res, next) {
+    const { id: UserId } = req.user_login;
+    try {
+      const usercourses = UserCourse.findAll({
+        where: {
+          status: "active",
+          UserId: UserId,
+        },
+        include: {
+          model: Course,
+        },
+      });
+
+      res.status(200).json({
+        code: 200,
+        message: "Success get all your learning",
+        status: "success",
+        learnings: usercourses,
       });
     } catch (error) {
       next(error);
