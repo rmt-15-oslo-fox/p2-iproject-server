@@ -29,7 +29,7 @@ const authentication = async (req, res, next) => {
             }
         });
 
-        if(!foundUser) {
+        if(!foundUser) {h
             throw new Error("User not found")
         }
         req.user = {
