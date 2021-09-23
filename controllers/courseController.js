@@ -149,36 +149,36 @@ class CourseController {
           },
           { where: { order_id }, returning: true }
         );
-      }
 
-      const courseIds = results[1].map((element) => {
-        return element.CourseId;
-      });
+        const courseIds = results[1].map((element) => {
+          return element.CourseId;
+        });
 
-      const courses = await Course.findAll({
-        where: {
-          id: courseIds,
-        },
-      });
-
-      const instructors = courses.map((course) => {
-        return {
-          price: course.price,
-          instructor_id: course.instructor_id,
-        };
-      });
-
-      for (let i = 0; i < instructors.length; i++) {
-        const element = instructors[i];
-        const user = await User.findOne({
+        const courses = await Course.findAll({
           where: {
-            id: element.instructor_id,
+            id: courseIds,
           },
         });
-        user.balance += element.price;
-        await user.save();
+
+        const instructors = courses.map((course) => {
+          return {
+            price: course.price,
+            instructor_id: course.instructor_id,
+          };
+        });
+
+        for (let i = 0; i < instructors.length; i++) {
+          const element = instructors[i];
+          const user = await User.findOne({
+            where: {
+              id: element.instructor_id,
+            },
+          });
+          user.balance += element.price;
+          await user.save();
+        }
+        res.status(200);
       }
-      res.status(200);
     } catch (err) {
       next(err);
     }
