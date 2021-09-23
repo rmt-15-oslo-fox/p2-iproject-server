@@ -13,8 +13,9 @@ class ForumController {
   }
   // add comment to specific stock
   static async addComment(req, res, next) {
-    const { stockName, comment, commentator } = req.body
+    const { stockName, comment } = req.body
     const userId = req.user.id
+    const commentator = req.user.email
     try {
       const newComment = await Forum.create({stockName, comment, commentator, userId})
       res.status(200).json(newComment)

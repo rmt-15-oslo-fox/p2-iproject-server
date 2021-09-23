@@ -5,9 +5,9 @@ const { sign } = require('../helpers/jwt')
 class UserController {
    // register
    static async register(req, res, next) {
-    const { email, password } = req.body
+    const { username, email, password } = req.body
     try {
-      const newUser = await User.create({email, password})
+      const newUser = await User.create({username, email, password})
       let result = {
         id: newUser.id,
         email: newUser.email
