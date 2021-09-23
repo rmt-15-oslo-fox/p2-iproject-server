@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Demo, {foreignKey: 'userId'})
       User.hasMany(models.Watchlist, {foreignKey: 'userId'})
-      User.hasMany(models.Forums, {foreignKey: 'userId'})
+      User.hasMany(models.Forum, {foreignKey: 'userId'})
     }
   };
   User.init({
