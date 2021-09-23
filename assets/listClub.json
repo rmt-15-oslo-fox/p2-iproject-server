@@ -1,0 +1,101 @@
+[
+    {
+        "name": "Arsenal",
+        "image": "https://2.bp.blogspot.com/-Ab6_YwIx3AA/XC494UFwonI/AAAAAAABxtw/Uy4bcbeYlo8LMTACiDrdzl5HAqXiL4AJgCLcBGAs/s1600/arsenal-logo-redesign-concept-full-arsenal-logo-history%2B%25283%2529.jpg",
+        "stadion": "Emirates Stadium"
+    },
+    {
+        "name": "Aston Villa",
+        "image": "https://media-exp1.licdn.com/dms/image/C4E0BAQHPBgAnf0Ystw/company-logo_200_200/0/1519867904246?e=2159024400&v=beta&t=mZd3fa8Bnc8pznNXRgMhGMDIePP8vvkxJcTSYTDG0ok",
+        "stadion": "Villa Park"
+    },
+    {
+        "name": "Brentford",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFH1MlYRBcGcVeS7PZIXpU1QwWeospIk41-Zn74eV7ATcSsRopi-8l0AuY1bnX8U4NN_Y&usqp=CAU",
+        "stadion": "Brentford Community Stadium"
+    },
+    {
+        "name": "Brighton and Hove Albion",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFH1MlYRBcGcVeS7PZIXpU1QwWeospIk41-Zn74eV7ATcSsRopi-8l0AuY1bnX8U4NN_Y&usqp=CAU",
+        "stadion": "Amex Stadium"
+    },
+    {
+        "name": "Burnley",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRi4zy1KpFKeNveOxQwLc_Hbq6b-fNLLEB0LKQv8fKU6AsBVMjj16HH44LTTx6U3bqRZM&usqp=CAU",
+        "stadion": "Turf Moor"
+    },
+    {
+        "name": "Chelsea",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3u532PE5IxMIBi1uJ3l6St5exYydxuewws3yyv4cc4EsbcaoqAbjFSiN5OdYLaI__J-g&usqp=CAU",
+        "stadion": "Stamford Bridge"
+    },{
+        "name": "Crystal Palace",
+        "image": "https://www.logolynx.com/images/logolynx/b2/b2651d45434d61461e13481f5d2a946b.jpeg",
+        "stadion": "Selhurst Park"
+    },
+    {
+        "name": "Everton",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo_N104Ov8JNuE7VbKo-mZ1pyGhHEgltpaKQ_yHjoElwRJ-sRlfZ0sidOk8jcLCYt6q_k&usqp=CAU",
+        "stadion": "Goodison Park"
+    },
+    {
+        "name": "Leeds United",
+        "image": "https://thumbs.dreamstime.com/b/leeds-united-fc-logo-collection-vector-logos-most-famous-football-teams-world-152317756.jpg",
+        "stadion": "Elland Road"
+    },
+    {
+        "name": "Leicester City",
+        "image": "https://futboljobs.com/wp-content/uploads/2018/02/LeicesterCity.jpg",
+        "stadion": "King Power Stadium"
+    },
+    {
+        "name": "Liverpool",
+        "image": "https://i.tribune.com.pk/media/images/491145-liverpool-1357674824/491145-liverpool-1357674824.jpg",
+        "stadion": "Anfield"
+    },
+    {
+        "name": "Manchaster City",
+        "image": "https://statik.tempo.co/data/2015/12/25/id_467128/467128_620.jpg",
+        "stadion": "Etihad Stadium"
+    },
+    {
+        "name": "Manchaster United",
+        "image": "https://www.kibrispdr.org/data/manchester-united-wallpaper-3d-25.jpg",
+        "stadion": "Old Trafford"
+    },
+    {
+        "name": "Newcestle United",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbilO0DWt7ArcJqZqVnxeT8I7fBVcrongIyYeAAI6oYBIKjpHn9ENomNa9eKsp-pPtvgM&usqp=CAU",
+        "stadion": "St.James'Park"
+    },
+    {
+        "name": "Norwich City",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbilO0DWt7ArcJqZqVnxeT8I7fBVcrongIyYeAAI6oYBIKjpHn9ENomNa9eKsp-pPtvgM&usqp=CAU",
+        "stadion": "Carrow Road"
+    },
+    {
+        "name": "Southampton",
+        "image": "https://pbs.twimg.com/media/C5q9NR8WMAEnp0b.jpg",
+        "stadion": "St.Mary's Stadium"
+    },
+    {
+        "name": "Tottenham Hotspur",
+        "image": "https://cdns.klimg.com/bola.net/library/p/spurs2.jpg",
+        "stadion": "Tottenham Hotspur Stadium"
+    },
+    {
+        "name": "Watford",
+        "image": "https://4.bp.blogspot.com/-4KV2hAO1PJ4/W3WJLRd-yxI/AAAAAAAACkk/H43DuGJsy5AYH9nXXLtopjKUjQGpn41XACLcBGAs/s400/Logo%2BWatford.png",
+        "stadion": "Vicarage Road"
+    },
+    {
+        "name": "West Ham United",
+        "image": "https://cdn.1min30.com/wp-content/uploads/2019/08/West-ham-logo-1.jpg",
+        "stadion": "London Stadium"
+    },
+    {
+        "name": "Wolverhampton Wanderers",
+        "image": "http://4.bp.blogspot.com/-eMzc1Y14G-s/UKP_ZOypULI/AAAAAAABfUM/5b27Ydj6rsw/s1600/Wolverhampton_Wanderers_Logo_History2.jpg",
+        "stadion": "Molineux Stadium"
+    }
+]
