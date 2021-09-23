@@ -174,7 +174,9 @@ class CourseController {
           user.balance += element.price;
           await user.save();
         }
-        res.status(200);
+        res.status(200).json({ status: "OK" });
+      } else {
+        res.status(200).json({ status: "OK" });
       }
     } catch (err) {
       next(err);
