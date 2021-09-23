@@ -150,7 +150,30 @@ class CourseController {
           { where: { order_id }, returning: true }
         );
       }
-      console.log(results[1], "<<<<<<<");
+
+      const courseIds = results[1].map((element) => {
+        return element.CourseId;
+      });
+
+      const courses = await Course.findAll({
+        where: {
+          id: courseIds,
+        },
+      });
+
+      const instructors = courses.map((course) => {
+        return {
+          price: course.price,
+          instructor_id: course.instructor_id,
+        };
+      });
+
+      instructors.forEach((element) => {
+        await User.increment("balance", {
+          by: element.price,
+          where: { id: element.instructor_id },
+        });
+      });
       res.status(200);
     } catch (err) {
       next(err);
