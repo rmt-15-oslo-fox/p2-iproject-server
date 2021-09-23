@@ -12,7 +12,7 @@ class HistoryController {
             } else {
                 next({
                     name: "NotFound",
-                    message: "Contact not found"
+                    message: "History not found"
                 })
             }
         } catch (error) {
