@@ -99,6 +99,39 @@ module.exports = {
         MountId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: 'Cibodas',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Gunung Putri',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Salabintana',
+        distance: 8,
+        tracking_time: 7,
+        location: 'Bogor',
+        transport: 'Naik bis dari stasiun a ke b',
+        jumlahPos: 10,
+        MountId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
      ])
   },
