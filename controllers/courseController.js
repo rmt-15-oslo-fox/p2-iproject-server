@@ -136,22 +136,21 @@ class CourseController {
   }
 
   static async notifMidtransHandler(req, res, next) {
-    const { transaction_status, order_id, gross_amount } = req.body;
+    const { transaction_status, order_id } = req.body;
 
     try {
       if (
         transaction_status === "settlement" ||
         transaction_status === "capture"
       ) {
-        const results = await UserCourse.update({
-          status: "active",
-          where: {
-            order_id,
+        const results = await UserCourse.update(
+          {
+            status: "active",
           },
-          returning: true,
-        });
-        console.log(results);
+          { where: { order_id }, returning: true }
+        );
       }
+      console.log(results[1], "<<<<<<<");
       res.status(200);
     } catch (err) {
       next(err);
