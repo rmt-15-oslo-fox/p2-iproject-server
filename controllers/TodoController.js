@@ -3,7 +3,7 @@ const axios = require("axios");
 
 class TodoController {
   static async createTodo(req, res, next) {
-    console.log(req.body);
+    // console.log(req.body);
     try {
       const id = +req.params.id;
       const userIdLogin = req.user.id;
