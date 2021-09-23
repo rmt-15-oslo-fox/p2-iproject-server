@@ -17,6 +17,21 @@ const errorHandler = (err, req, res, next) => {
             code = 400
             message = 'Please Login First'
             break;
+
+        case 'SequelizeForeignKeyConstraintError':
+            code = 400
+            message = 'Wrong Mountain Id / Track Id'
+            break;
+
+        case 'idNotFound':
+            code = 404
+            message = 'Trip Id Not found'
+            break;
+
+        case 'Missing params location':
+            code = 404
+            message = 'Missing params location'
+            break;
     
         case 'schedulenull':
             code = 400

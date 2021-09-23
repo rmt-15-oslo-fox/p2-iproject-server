@@ -82,6 +82,7 @@ class Controller {
     try {
       const UserId = req.userLogin.id
       let mytrip = await User.findByPk(UserId, {
+        attributes: ['id', 'name', 'email'],
         include: {
           model: Trip,
           include: ['Mountain', 'Track', 'Users']
@@ -122,6 +123,10 @@ class Controller {
     try {
       const { TripId } = req.params
       const UserId = req.userLogin.id
+      const isExist = await Trip.findByPk(TripId)
+      if(!isExist){
+        throw {name:'idNotFound'}
+      }
       const isHasMember = await GroupTrip.findAll({
         where: {
           TripId
@@ -150,6 +155,9 @@ class Controller {
   static async getWeather(req, res, next) {
     try {
       const { location } = req.query
+      if(!location){
+        throw {name: 'Missing params location'}
+      }
       const loc = await geoCodingAPI.get('', {
         params: {
           address: location
