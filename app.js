@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = 3000 || process.env.PORT;
@@ -12,7 +13,7 @@ io.on("connection", (socket) => {
   console.log(`user connected`);
 
   socket.on("sendMessage", (data) => {
-    console.log(data);
+    // console.log(data);
 
     socket.broadcast.emit("broadcastMessage", data);
   });
