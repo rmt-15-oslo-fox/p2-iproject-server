@@ -1,1 +1,7 @@
-GET https://data.covid19.go.id/public/api/update.json HTTP/1.1
+POST  http://localhost:3000/register HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+username=izon
+&email=wppq.yt@gmail.com
+&password=izon
+&city=Palu
