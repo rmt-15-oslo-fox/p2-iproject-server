@@ -15,6 +15,7 @@ const users = [];
 
 io.on("connection", (socket) => {
   console.log(`user connected`);
+  socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("sendMessage", (data) => {
     // console.log(data);
