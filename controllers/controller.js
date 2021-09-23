@@ -93,7 +93,26 @@ class Controller {
           status: "active",
           UserId: +UserId,
         },
-        include: [Course],
+        include: [
+          {
+            model: Course,
+            include: [
+              {
+                model: User,
+                attributes: {
+                  exclude: ["password", "createdAt", "updatedAt", "email"],
+                },
+                as: "Instructor",
+              },
+              {
+                model: Category,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
       });
 
       res.status(200).json({
