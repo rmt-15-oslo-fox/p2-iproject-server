@@ -8,6 +8,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === "FORBIDDEN") {
     code = 403;
     msg = err.msg;
+  } else if (err.name === "NOTAUTHORIZED") {
+    code = 401;
+    msg = err.msg;
   } else if (err.name === "SequelizeValidationError") {
     code = 400;
     msg = err.errors.map((el) => {

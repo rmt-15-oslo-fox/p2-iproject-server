@@ -1,6 +1,7 @@
 const { User, Todo, Community } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { signPayload } = require("../helpers/jwt");
+const axios = require("axios");
 
 class UserController {
   static async registerUser(req, res, next) {
@@ -89,9 +90,8 @@ class UserController {
 
   static async getUserById(req, res, next) {
     try {
-      const id = req.params.id;
+      const id = req.user.id;
       const user = await User.findByPk(id, {
-        include: [Todo],
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
@@ -109,6 +109,20 @@ class UserController {
       res.status(201).json(allCom);
     } catch (err) {
       // console.log(err);
+      next(err);
+    }
+  }
+
+  static async getAvatars(req, res, next) {
+    try {
+      const user = req.user.username;
+      const response = await axios({
+        method: "GET",
+        baseURL: `https://avatars.dicebear.com/api/avataaars/${user}.svg`,
+      });
+      const data = response.data;
+      res.status(200).json(data);
+    } catch (err) {
       next(err);
     }
   }

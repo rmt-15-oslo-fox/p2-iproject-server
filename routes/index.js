@@ -9,12 +9,13 @@ const router = require("express").Router();
 router.post("/register", UserController.registerUser);
 router.post("/login", UserController.loginHandler);
 router.get("/users", UserController.getAllUser);
-router.get("/users/:id", UserController.getUserById);
 router.use(authentication);
+router.get("/user", UserController.getUserById);
 
 router.get("/complete", TodoController.getUserTodosComplete); //menampilkan halaman yg udh complete
 router.get("/todos/:id", TodoController.getUserTodos);
 router.get("/weather", TodoController.getWeatherForecast);
+router.get("/avatar", UserController.getAvatars);
 router.post("/todos/:id", TodoController.createTodo);
 router.delete("/todos/:id", authorization, TodoController.deleteById);
 router.patch("/todos/:id", authorization, TodoController.completedTodo);
