@@ -70,7 +70,7 @@ class ArticleController {
                 })
 
                 res.status(200).json({
-                    message: `Job id ${id} success deleted`
+                    message: `Article id ${id} success deleted`
                 })
             } else {
                 next({

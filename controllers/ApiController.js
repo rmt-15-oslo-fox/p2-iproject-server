@@ -8,9 +8,13 @@ class ApiController {
                 url: "https://www.instagram.com/dagelan/channel/?__a=1"
             })
             .then((responseAxios) => {
+                console.log(responseAxios.data);
                 res.status(200).json({
                     data: responseAxios.data.graphql
                 })
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
 
