@@ -1,4 +1,4 @@
-const { pwdValidation } = require("../helpers/bcryptjs");
+const { pwdValidation, hash } = require("../helpers/bcryptjs");
 const { generateToken } = require("../helpers/jwt");
 const sendNodemailer = require("../helpers/nodemailer");
 const { User } = require("../models");
@@ -93,19 +93,21 @@ class UserController {
         token = generateToken({
           id: user.id,
           username: user.username,
-          role: user.role,
+          name: user.name,
         });
         res.status(200).json({ token });
       } else {
         const newUser = await User.create({
           username: payload.name.trim(),
           email: payload.email,
-          role: "customer",
+          name: payload.email,
+          balance: 0,
           password: hash(payload.email),
         });
         res.status(201).json({ email: newUser.email });
       }
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
