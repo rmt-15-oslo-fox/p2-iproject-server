@@ -16,7 +16,7 @@ class FetchController {
       })
       let composite = `^${index}`
       let timeStamp = data[composite].timestamp.map(element => {
-        let newDate = new Date(element*1000).tol 
+        let newDate = new Date((1632467700+(3600*7)) * 1000) // adjusting timzone for deploy region (Heroku-US)
         let formattedDate = newDate.getDate().toLocaleString('id-ID') + '/' + newDate.getMonth().toLocaleString('id-ID')
         return formattedDate
       });
@@ -49,7 +49,7 @@ class FetchController {
         }
       })
       let timeStamp = data[stockName].timestamp.map(element => {
-        let newDate = new Date(element*1000) 
+        let newDate = new Date((1632467700+(3600*7)) * 1000) // adjusting timzone for deploy region (Heroku-US)
         let formattedTime = newDate.getHours().toLocaleString('id-ID') + ':' + newDate.getMinutes().toLocaleString('id-ID')
         return formattedTime
       });
