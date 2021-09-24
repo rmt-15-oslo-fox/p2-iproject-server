@@ -4,6 +4,7 @@ const axios = require('axios')
 const api1 = 'QFjCk1Q1Kox96QYKbLEf7YMcBqfALBt1eZrgNcpb'
 const api2 = 'Y0Lixb7xv73Jg85WovOsr3SsWBhRlt2DaeRWyKFE'
 const api3 = '6Z2HHk7WHW2SXqNxmQpQeIRMD1JdnTH9xzOPaN76'
+const api4 = 'Cx4p0gRZHd7Ul03TyHFSC7oPJqMxPvuR4PZkbm2H'
 
 // news api org
 const newsapi = 'f19be7182e244e8fa43049d06f1e2920'
@@ -18,7 +19,7 @@ class FetchController {
         url: `https://yfapi.net/v8/finance/spark?interval=1d&range=1mo&symbols=%5E${index}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api1
+          'x-api-key': api4
         }
       })
       let composite = `^${index}`
@@ -53,7 +54,7 @@ class FetchController {
         url: `https://yfapi.net/v8/finance/spark?interval=15m&range=1d&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api1
+          'x-api-key': api4
         }
       })
       let timeStamp = data[stockName].timestamp.map(element => {
@@ -85,7 +86,7 @@ class FetchController {
         url: `https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api1
+          'x-api-key': api4
         }
       })
       if(data.quoteResponse.result[0]){
@@ -105,7 +106,7 @@ class FetchController {
         url: `https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api1
+          'x-api-key': api4
         }
       })
       if(data.quoteResponse.result){
