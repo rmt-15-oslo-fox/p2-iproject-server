@@ -54,15 +54,20 @@ const data = {
 }
 
 let a = 'ASII.JK'
-let timeSt = data[a].timestamp[3]
+let timeSt = data[a].timestamp[6]
 
 // timeSt.forEach(element => {
 //   element = new Date(element*1000)
 // });
 
-let newDate = new Date(timeSt * 1000)
-let formattedDate = newDate.getDate() + '/' + newDate.getMonth()
+let newDate = new Date( 1632467700 * 1000)
+let formattedDate = newDate.getDate().toLocaleString('id-ID') + '/' + newDate.getMonth().toLocaleString('id-ID')
 
-let formattedTime = newDate.getHours() 
-
-console.log(formattedTime)
+let formattedTime = newDate.getHours().toLocaleString('id-ID') + ':' + newDate.getMinutes().toLocaleString('id-ID')
+// console.log(formattedDate)
+let nam = 'ASII.JK'
+console.log(nam.includes('.JK'));
+let ab = [1, 2, 3, 4, null]
+ab = ab.filter(Number)
+ab.unshift(0)
+console.log(ab);

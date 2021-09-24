@@ -1,13 +1,5 @@
 const axios = require('axios')
-
-// yahoo finance api
-const api1 = 'QFjCk1Q1Kox96QYKbLEf7YMcBqfALBt1eZrgNcpb'
-const api2 = 'Y0Lixb7xv73Jg85WovOsr3SsWBhRlt2DaeRWyKFE'
-const api3 = '6Z2HHk7WHW2SXqNxmQpQeIRMD1JdnTH9xzOPaN76'
-const api4 = 'Cx4p0gRZHd7Ul03TyHFSC7oPJqMxPvuR4PZkbm2H'
-
-// news api org
-const newsapi = 'f19be7182e244e8fa43049d06f1e2920'
+let { yahooFinanceApi, newsApiOrg } = require('../helpers/apiKey')
 
 class FetchController {
   static async fetchCompositeIndex (req, res, next) {
@@ -19,14 +11,13 @@ class FetchController {
         url: `https://yfapi.net/v8/finance/spark?interval=1d&range=1mo&symbols=%5E${index}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api4
+          'x-api-key': yahooFinanceApi()
         }
       })
       let composite = `^${index}`
       let timeStamp = data[composite].timestamp.map(element => {
-        let newDate = new Date(element*1000) 
-        // let formattedTime = newDate.getHours() + ' : ' + newDate.getMinutes()
-        let formattedDate = newDate.getDate() + '/' + newDate.getMonth()
+        let newDate = new Date(element*1000).tol 
+        let formattedDate = newDate.getDate().toLocaleString('id-ID') + '/' + newDate.getMonth().toLocaleString('id-ID')
         return formattedDate
       });
       data[composite].timestamp = timeStamp
@@ -54,19 +45,25 @@ class FetchController {
         url: `https://yfapi.net/v8/finance/spark?interval=15m&range=1d&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api4
+          'x-api-key': yahooFinanceApi()
         }
       })
       let timeStamp = data[stockName].timestamp.map(element => {
         let newDate = new Date(element*1000) 
-        let formattedTime = newDate.getHours() + ' : ' + newDate.getMinutes()
+        let formattedTime = newDate.getHours().toLocaleString('id-ID') + ':' + newDate.getMinutes().toLocaleString('id-ID')
         return formattedTime
       });
       data[stockName].timestamp = timeStamp
 
-      if(data[stockName].close[0] > data[stockName].close[data[stockName].close.length -2]) {
+      if(stockName.includes('JK')) {
+        data[stockName].close.unshift(data[stockName].previousClose)
+      }
+
+      data[stockName].close = data[stockName].close.filter(Number)
+
+      if(data[stockName].close[0] > data[stockName].close[data[stockName].close.length -1]) {
         data[stockName].color = 'red'
-      } else if (data[stockName].close[0] < data[stockName].close[data[stockName].close.length -2]) {
+      } else if (data[stockName].close[0] < data[stockName].close[data[stockName].close.length -1]) {
         data[stockName].color = 'green'
       } else {
         data[stockName].color = 'yellow'
@@ -86,7 +83,7 @@ class FetchController {
         url: `https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api4
+          'x-api-key': yahooFinanceApi()
         }
       })
       if(data.quoteResponse.result[0]){
@@ -106,7 +103,7 @@ class FetchController {
         url: `https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=${stockName}`,
         params: {modules: 'defaultKeyStatistics,assetProfile'},
         headers: {
-          'x-api-key': api4
+          'x-api-key': yahooFinanceApi()
         }
       })
       if(data.quoteResponse.result){
@@ -126,7 +123,7 @@ class FetchController {
     try {
       const { data } =  await axios({
         method: 'GET',
-        url: `https://newsapi.org/v2/top-headlines?q=${keywords}&country=id&category=business&apiKey=${newsapi}`,
+        url: `https://newsapi.org/v2/top-headlines?q=${keywords}&country=id&category=business&apiKey=${newsApiOrg()}`,
       })
       res.status(200).json(data)
     } catch (error) {
