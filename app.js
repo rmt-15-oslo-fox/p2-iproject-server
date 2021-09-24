@@ -56,17 +56,19 @@ io.on("connection", (socket) => {
 
   //user disconnect
 
-  socket.on("disconnect", () => {
+  socket.on("disconnecting", () => {
     const user = userLeaveChat(socket.id);
-    // console.log(user, "disconnect");
 
+    // socket.join(user.room);
     if (user) {
-      io.to(user.room).emit(
-        "message",
-        formatMessage(botWelcome, `${user.username} has left the chat`)
-      );
+      socket
+        .to(user.room)
+        .emit(
+          "message",
+          formatMessage(botWelcome, `${user.username} has left the chat`)
+        );
 
-      io.to(user.room).emit("roomUsers", {
+      socket.to(user.room).emit("roomUsers", {
         room: user.room,
         users: getRoomChat(user.room),
       });
