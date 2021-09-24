@@ -8,7 +8,7 @@ class PaymentController {
   static async info(req, res, next) {
     try {
       const info = await User.findByPk(req.login.id, {
-        attributes: ["name", "balance"],
+        attributes: ["name", "balance", "id"],
       });
       res.status(200).json({ info });
     } catch (err) {
